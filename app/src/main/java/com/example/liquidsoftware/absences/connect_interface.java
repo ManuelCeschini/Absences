@@ -8,17 +8,17 @@ public interface connect_interface {
 
     //get Schueler
     public void getSchuelerId();
-    public void getVorname();
-    public void getNachname();
-    public void getGeburtstag();
-    public void getEmail();
+    public void getSchuelerVorname();
+    public void getSchuelerNachname();
+    public void getSchuelerGeburtstag();
+    public void getSchuelerEmail();
 
     //set Schueler
     public int setSchuelerId();
-    public String setVorname();
-    public String setNachname();
-    public long setGeburtstag();
-    public String setEmail();
+    public String setSchuelerVorname();
+    public String setSchuelerNachname();
+    public long setSchuelerGeburtstag();
+    public String setSchuelerEmail();
 
     //get Absenzen
     public void getAbsenzenId();
@@ -34,7 +34,24 @@ public interface connect_interface {
     public long setDatumEnde();
     public String setGrund();
 
+    //set Klassenlehrer
+    public int setKlassenlehrerId();
+    public String setLehrerVorname();
+    public String setLehrerNachname();
+    public String setLehrerEmail();
 
+    //get Klassenlehrer
+    public void getKlassenlehrerId();
+    public void getLehrerVorname();
+    public void getLehrerNachname();
+    public void getLehrerEmail();
 
+    //set Klasse
+    public int setKlassenId();
+    public String setKlassenName();
+
+    //get Klasse
+    public void getKlassenId();
+    public void getKlassenName();
 
 }
