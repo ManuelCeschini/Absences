@@ -1,10 +1,13 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Context;
+import android.net.Uri;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,34 +20,37 @@ import java.util.ArrayList;
 public class adapter  extends ArrayAdapter<database_parameters> { //extends ArrayAdapter<abfragen>
 
     database_parameters params = new database_parameters();
-    public ListView list;
-    public TextView titel;
-    public TextView datum_anfang;
-    public TextView datum_ende;
+
+    private static class ViewHolder {
+        public TextView titel;
+        public TextView datum_anfang;
+        public TextView datum_ende;
+        public TextView begruendung;
+    }
 
     public adapter(Context context, ArrayList<database_parameters> params){
         super(context, 0, params);
-        connectors();
-        abfragen();
-        fuellen();
     }
 
-    //public View getView(int position, View converView, ViewGroup viewGroup{return converView;}
-
-    public void connectors(){
-        list.findViewById(R.id.list);
-        titel.findViewById(R.id.titel);
-        datum_anfang.findViewById(R.id.datum_anfang);
-        datum_ende.findViewById(R.id.datum_anfang);
-    }
-    public void abfragen(){
-        //abfragen
-    }
-    public void fuellen(){
-
-     titel.setText(params.getTitel());
-     datum_anfang.setText(params.getDatumBeginn());
-     datum_anfang.setText(params.getDatumEnde());
+    public View getView(int position, View converView, ViewGroup viewGroup){
+        ViewHolder viewHolder;
+        if(converView == null){
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            converView = inflater.inflate(R.layout.item, viewGroup, false);
+            viewHolder.titel = (TextView) converView.findViewById(R.id.titel);
+            viewHolder.datum_anfang = (TextView) converView.findViewById(R.id.datum_anfang);
+            viewHolder.datum_ende = (TextView) converView.findViewById(R.id.datum_ende);
+            viewHolder.begruendung = (TextView) converView.findViewById(R.id.datum_ende);
+            converView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder)converView.getTag();
+        }
+        viewHolder.titel.setText(params.getTitel());
+        viewHolder.datum_anfang.setText(params.getDatumBeginn());
+        viewHolder.datum_ende.setText(params.getDatumEnde());
+        viewHolder.begruendung.setText(params.getGrund());
+        return converView;
     }
 
 }
