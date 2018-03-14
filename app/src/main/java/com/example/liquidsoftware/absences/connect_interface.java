@@ -6,52 +6,53 @@ package com.example.liquidsoftware.absences;
 
 public interface connect_interface {
 
-    //get Schueler
-    public void getSchuelerId();
-    public void getSchuelerVorname();
-    public void getSchuelerNachname();
-    public void getSchuelerGeburtstag();
-    public void getSchuelerEmail();
-
     //set Schueler
-    public int setSchuelerId();
-    public String setSchuelerVorname();
-    public String setSchuelerNachname();
-    public long setSchuelerGeburtstag();
-    public String setSchuelerEmail();
+    public void setSchuelerId(int id);
+    public void setSchuelerVorname(String vorname);
+    public void setSchuelerNachname(String nachname);
+    public void setSchuelerGeburtstag(String geburtstag);
+    public void setSchuelerEmail(String email);
 
-    //get Absenzen
-    public void getAbsenzenId();
-    public void getTitel();
-    public void getDatumBeginn();
-    public void getDatumEnde();
-    public void getGrund();
+    //get Schueler
+    public int getSchuelerId();
+    public String getSchuelerVorname();
+    public String getSchuelerNachname();
+    public String getSchuelerEmail();
 
     //set Absenzen
-    public int setAbsenzenId();
-    public String setTitel();
-    public long setDatumBeginn();
-    public long setDatumEnde();
-    public String setGrund();
+    public void setAbsenzenId(int id);
+    public void setTitel(String titel);
+    public void setDatumBeginn(String datum);
+    public void setDatumEnde(String datum);
+    public void setGrund(String grund);
+
+    //get Absenzen
+    public int getAbsenzenId();
+    public String getTitel();
+    public String getDatumBeginn();
+    public String getDatumEnde();
+    public String getGrund();
 
     //set Klassenlehrer
-    public int setKlassenlehrerId();
-    public String setLehrerVorname();
-    public String setLehrerNachname();
-    public String setLehrerEmail();
+    public void setKlassenlehrerId(int id);
+    public void setLehrerVorname(String vorname);
+    public void setLehrerNachname(String nachname);
+    public void setLehrerEmail(String email);
 
     //get Klassenlehrer
-    public void getKlassenlehrerId();
-    public void getLehrerVorname();
-    public void getLehrerNachname();
-    public void getLehrerEmail();
+    public int getKlassenlehrerId();
+    public String getLehrerVorname();
+    public String getLehrerNachname();
+    public String getLehrerEmail();
 
     //set Klasse
-    public int setKlassenId();
-    public String setKlassenName();
+    public void setKlassenId(int id);
+    public void setKlassenName(String name);
 
     //get Klasse
-    public void getKlassenId();
-    public void getKlassenName();
+    public int getKlassenId();
+    public String getKlassenName();
+
+
 
 }
