@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Manuel on 07.03.2018.
  */
 
-public class adapter  extends ArrayAdapter<database_parameters> { //extends ArrayAdapter<abfragen>
+public class adapter  extends ArrayAdapter<database_parameters> {
 
     database_parameters params = new database_parameters();
 
