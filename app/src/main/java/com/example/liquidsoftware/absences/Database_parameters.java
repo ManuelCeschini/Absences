@@ -1,5 +1,13 @@
 package com.example.liquidsoftware.absences;
 
+import android.support.v7.graphics.drawable.DrawerArrowDrawable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by Manuel on 14.03.2018.
  */
@@ -160,4 +168,5 @@ public class Database_parameters implements Connect_interface {
     public String getKlassenName() {
         return null;
     }
+
 }
