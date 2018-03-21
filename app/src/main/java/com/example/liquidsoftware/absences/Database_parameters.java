@@ -4,7 +4,7 @@ package com.example.liquidsoftware.absences;
  * Created by Manuel on 14.03.2018.
  */
 
-public class database_parameters implements connect_interface {
+public class Database_parameters implements Connect_interface {
 
     @Override
     public void setSchuelerId(int id) {

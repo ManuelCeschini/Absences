@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".objectView"></activity>
+        <activity android:name=".ObjectView"></activity>
     </application>
 
 </manifest>

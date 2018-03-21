@@ -1,14 +1,10 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,9 +13,9 @@ import java.util.ArrayList;
  * Created by Manuel on 07.03.2018.
  */
 
-public class adapter  extends ArrayAdapter<database_parameters> {
+public class Adapter extends ArrayAdapter<Database_parameters> {
 
-    database_parameters params = new database_parameters();
+    Database_parameters params = new Database_parameters();
 
     private static class ViewHolder {
         public TextView titel;
@@ -28,7 +24,7 @@ public class adapter  extends ArrayAdapter<database_parameters> {
         public TextView begruendung;
     }
 
-    public adapter(Context context, ArrayList<database_parameters> params){
+    public Adapter(Context context, ArrayList<Database_parameters> params){
         super(context, 0, params);
     }
 

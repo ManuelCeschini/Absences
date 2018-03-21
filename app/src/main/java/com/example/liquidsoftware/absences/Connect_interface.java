@@ -4,7 +4,7 @@ package com.example.liquidsoftware.absences;
  * Created by Manuel on 07.03.2018.
  */
 
-public interface connect_interface {
+public interface Connect_interface {
 
     //set Schueler
     public void setSchuelerId(int id);
