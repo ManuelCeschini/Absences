@@ -12,33 +12,52 @@ import java.util.ArrayList;
 
 public class Absence {
     private String id;
-    private String title;
-    public String datum;
+    private String titel;
+    private String datum_beginn;
+    private String datum_ende;
+    private String grund;
 
-    public void setPositionId(String id) {
-
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDatum(String datum) {
-        this.datum = datum;
-    }
-
-    public String getOpenLibraryId() {
+    public String getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getDatum() {
-        return datum;
+    public String getTitel() {
+        return titel;
     }
+
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public String getDatum_beginn() {
+        return datum_beginn;
+    }
+
+    public void setDatum_beginn(String datum_beginn) {
+        this.datum_beginn = datum_beginn;
+    }
+
+    public String getDatum_ende() {
+        return datum_ende;
+    }
+
+    public void setDatum_ende(String datum_ende) {
+        this.datum_ende = datum_ende;
+    }
+
+    public String getGrund() {
+        return grund;
+    }
+
+    public void setGrund(String grund) {
+        this.grund = grund;
+    }
+
+
 
     public static Absence fromJSON(JSONObject o){
         Absence abc = new Absence();
@@ -49,15 +68,29 @@ public class Absence {
                 final JSONArray ids = o.getJSONArray("edition_key");
                 abc.id = ids.getString(0);
             }
-            abc.title = o.has("title_suggest") ? o.getString("title_suggest") : "";
-            abc.author = findeAutor(o);
+            abc.titel = o.has("title_suggest") ? o.getString("title_suggest") : "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return book;
+        return abc;
     }
-    private static String findeAutor(JSONObject o) {
+
+
+    public static ArrayList<Absence> fromJSON(JSONArray jsonArray) {
+        ArrayList<Absence> absences = new ArrayList<>();
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject o = jsonArray.getJSONObject(i);
+                Absence b = fromJSON(o);
+                absences.add(b);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return absences;
+    }
+    /*private static String findeAutor(JSONObject o) {
         String result = "";
         try {
             final JSONArray aJSONA = o.getJSONArray("author_name");
@@ -68,20 +101,5 @@ public class Absence {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public static ArrayList<Book> fromJSON(JSONArray jsonArray) {
-        ArrayList<Book> books = new ArrayList<>();
-        try {
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject o = jsonArray.getJSONObject(i);
-                Book b = fromJSON(o);
-                books.add(b);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return books;
-    }
-}
+    }*/
 }
