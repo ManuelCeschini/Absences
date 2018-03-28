@@ -11,17 +11,17 @@ import java.util.ArrayList;
  */
 
 public class Absence {
-    private String id;
+    private int id;
     private String titel;
     private String datum_beginn;
     private String datum_ende;
     private String grund;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,20 +60,24 @@ public class Absence {
 
 
     public static Absence fromJSON(JSONObject o){
-        Absence abc = new Absence();
-        try {
+        Absence abs = new Absence();
+        try {/*
             if (o.has("cover_edition_key"))  {
                 abc.id = o.getString("cover_edition_key");
             } else if(o.has("edition_key")) {
                 final JSONArray ids = o.getJSONArray("edition_key");
                 abc.id = ids.getString(0);
             }
-            abc.titel = o.has("title_suggest") ? o.getString("title_suggest") : "";
+            abc.titel = o.has("title_suggest") ? o.getString("title_suggest") : "";*/
+            abs.id = o.getInt("absenz_id");
+            abs.titel = o.getString("titel");
+            abs.grund = o.getString("grund");
+            abs.datum_beginn = o.getString("datum_beginn");
+            abs.datum_ende = o.getString("datum_ende");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return abc;
+        return abs;
     }
 
 
