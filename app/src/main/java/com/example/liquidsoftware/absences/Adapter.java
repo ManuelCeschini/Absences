@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by Manuel on 07.03.2018.
  */
 
-public class Adapter extends ArrayAdapter<Database_parameters> {
+public class Adapter extends ArrayAdapter<Absence> {
 
 
 
@@ -26,7 +26,7 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
         public TextView begruendung;
     }
 
-    public Adapter(Context context, ArrayList<Database_parameters> params){
+    public Adapter(Context context, ArrayList<Absence> params){
         super(context, 0, params);
     }
 
@@ -34,7 +34,7 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
 
 
     public View getView(int position, View converView, ViewGroup viewGroup){
-        Database_parameters params = getItem(position);
+        Absence params = getItem(position);
         ViewHolder viewHolder;
         if(converView == null){
             viewHolder = new ViewHolder();
@@ -49,11 +49,10 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
             viewHolder = (ViewHolder)converView.getTag();
         }
         viewHolder.titel.setText(params.getTitel());
-        viewHolder.datum_anfang.setText(params.getDatumBeginn());
-        viewHolder.datum_ende.setText(params.getDatumEnde());
+        viewHolder.datum_anfang.setText(params.getDatum_beginn());
+        viewHolder.datum_ende.setText(params.getDatum_ende());
         viewHolder.begruendung.setText(params.getGrund());
         return converView;
     }
-
 
 }

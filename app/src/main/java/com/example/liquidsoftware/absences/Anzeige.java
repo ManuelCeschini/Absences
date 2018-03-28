@@ -19,5 +19,7 @@ public class Anzeige extends AppCompatActivity {
         datumanfang = (TextView)findViewById(R.id.AnzeigeDatumStart);
         datumende = (TextView)findViewById(R.id.AnzeigeDatumEnde);
         begruendung = (TextView)findViewById(R.id.AnzeigeBegruendung);
+
+
     }
 }

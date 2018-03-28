@@ -34,11 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView1);
-        ArrayList<Database_parameters> arr = new ArrayList<>();
+        ArrayList<Absence> arr = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            arr.add(new Database_parameters());
+            arr.add(new Absence());
         }
-        arr.add(new Database_parameters());
         Adapter adapter = new Adapter(this, arr);
         lv.setAdapter(adapter);
         anzeige();
