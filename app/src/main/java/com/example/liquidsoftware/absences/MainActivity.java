@@ -35,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView1);
         ArrayList<Absence> arr = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            arr.add(new Absence());
-        }
+        Absence a = new Absence();
+        //a.fromJSON();
+
+        //arr.add(new Absence());
         Adapter adapter = new Adapter(this, arr);
         lv.setAdapter(adapter);
         anzeige();
