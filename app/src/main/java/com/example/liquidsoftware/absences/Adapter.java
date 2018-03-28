@@ -1,10 +1,12 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 public class Adapter extends ArrayAdapter<Database_parameters> {
 
-    Database_parameters params = new Database_parameters();
+
 
     private static class ViewHolder {
         public TextView titel;
@@ -28,7 +30,11 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
         super(context, 0, params);
     }
 
+
+
+
     public View getView(int position, View converView, ViewGroup viewGroup){
+        Database_parameters params = getItem(position);
         ViewHolder viewHolder;
         if(converView == null){
             viewHolder = new ViewHolder();
@@ -37,7 +43,7 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
             viewHolder.titel = (TextView) converView.findViewById(R.id.titel);
             viewHolder.datum_anfang = (TextView) converView.findViewById(R.id.datum_anfang);
             viewHolder.datum_ende = (TextView) converView.findViewById(R.id.datum_ende);
-            viewHolder.begruendung = (TextView) converView.findViewById(R.id.datum_ende);
+            viewHolder.begruendung = (TextView) converView.findViewById(R.id.begruendung);
             converView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)converView.getTag();
@@ -48,5 +54,6 @@ public class Adapter extends ArrayAdapter<Database_parameters> {
         viewHolder.begruendung.setText(params.getGrund());
         return converView;
     }
+
 
 }
