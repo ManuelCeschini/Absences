@@ -2,6 +2,7 @@ package com.example.liquidsoftware.absences;
 
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,17 +31,20 @@ public class MainActivity extends AppCompatActivity {
 
     View convertView;
     ListView lv;
+    AbsencesClient ac;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView1);
+        ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
-        Absence a = new Absence();
-        //a.fromJSON();
-
-        //arr.add(new Absence());
+        /*for (int i = 0; i < 10; i++) {
+            arr.add(new Absence());
+        }*/
+        arr = fetchAbsenzen();
         Adapter adapter = new Adapter(this, arr);
         lv.setAdapter(adapter);
         anzeige();
@@ -55,6 +61,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public ArrayList<Absence> fetchAbsenzen() {
+        ac.getAbsence(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                JSONArray arr = null;
+                if (response != null) {
+                    try {
+                        arr = response.getJSONArray("features");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    absences = Absence.fromJSON(arr);
+                }
+            }
+        });
+        return absences;
     }
 }
 

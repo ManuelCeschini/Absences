@@ -19,7 +19,7 @@ public class AbsencesClient {
         return url;
     }
 
-    public void getData(JsonHttpResponseHandler handler) {
+    public void getAbsence(JsonHttpResponseHandler handler) {
          client.get(getAPIUrl(), handler);
     }
 }
