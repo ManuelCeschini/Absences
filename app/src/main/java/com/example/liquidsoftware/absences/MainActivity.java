@@ -18,14 +18,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    ArrayList<Absence> absences = new ArrayList<>();
     public ArrayList<Absence> fetchAbsenzen() {
         ac.getAbsence(new JsonHttpResponseHandler() {
-            @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
                 if (response != null) {
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         return absences;
     }
 }
