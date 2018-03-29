@@ -16,6 +16,7 @@
         android:textSize="18dp"
         android:layout_toRightOf="@id/titel"
         android:layout_margin="8dp"
+        android:gravity="center"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
         android:textSize="18dp"
         android:layout_toRightOf="@+id/datum_anfang"
         android:layout_margin="8dp"
+        android:gravity="center"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -32,6 +34,7 @@
         android:textSize="18dp"
         android:layout_below="@id/titel"
         android:layout_margin="8dp"
+        android:gravity="center"
         />
 
 </RelativeLayout>

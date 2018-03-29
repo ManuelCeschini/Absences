@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     ListView lv;
     AbsencesClient ac;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,27 +45,45 @@ public class MainActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
-        /*for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             arr.add(new Absence());
-        }*/
-        arr = fetchAbsenzen();
+        }
+        try {
+            //arr = fetchAbsenzen();
+        }catch (Exception e){
+            System.out.println("Fail to load params fron fetchAbsenzen");
+        }
+
         Adapter adapter = new Adapter(this, arr);
         lv.setAdapter(adapter);
         anzeige();
-
+        actionButton();
     }
 
     public void anzeige(){
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClassName(getPackageName(), getPackageName() + ".Anzeige");
-                intent.putExtra("selected", lv.getAdapter().getItem(arg2).toString());
+                //intent.putExtra("id", lv.getAdapter().getItem(position).toString());
+                intent.putExtra("position", position);
                 startActivity(intent);
+            }
+
+        });
+    }
+
+    public void actionButton(){
+        FloatingActionButton abt = findViewById(R.id.actionButton);
+        abt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO actionButton action
             }
         });
     }
+
     ArrayList<Absence> absences = new ArrayList<>();
     public ArrayList<Absence> fetchAbsenzen() {
         ac.getAbsence(new JsonHttpResponseHandler() {
@@ -81,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         return absences;
     }
 }
