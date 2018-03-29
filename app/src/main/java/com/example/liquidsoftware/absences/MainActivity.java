@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     View convertView;
     ListView lv;
     AbsencesClient ac;
+    Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        /*for (int i = 0; i < 10; i++) {
             arr.add(new Absence());
-        }
+        }*/
+        adapter = new Adapter(this, arr);
         try {
-            //arr = fetchAbsenzen();
+            if (adapter.getCount() == 0) {
+                fetchAbsenzen();
+            }
         }catch (Exception e){
             System.out.println("Fail to load params fron fetchAbsenzen");
         }
-
-        Adapter adapter = new Adapter(this, arr);
         lv.setAdapter(adapter);
         anzeige();
         actionButton();
@@ -84,22 +86,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    ArrayList<Absence> absences = new ArrayList<>();
-    public ArrayList<Absence> fetchAbsenzen() {
+    //ArrayList<Absence> absences = new ArrayList<>();
+    public void fetchAbsenzen() {
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
+                ArrayList<Absence> absences;
                 if (response != null) {
                     try {
-                        arr = response.getJSONArray("features");
+                        arr = response.getJSONArray("absenz");
+                        absences = Absence.fromJSON(arr);
+                        adapter.addAll(absences);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    absences = Absence.fromJSON(arr);
+
                 }
             }
         });
-        return absences;
+        //return absences;
     }
 }
 
