@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //login();
         lv = (ListView) findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
@@ -75,6 +76,19 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+    public void login(){
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClassName(getPackageName(), getPackageName() + ".Login");
+                startActivity(intent);
+            }
+
+        });
+    }
+
 
     public void actionButton(){
         FloatingActionButton abt = findViewById(R.id.actionButton);

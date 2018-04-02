@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.sql.SQLOutput;
+
 public class Anzeige extends AppCompatActivity {
 
     TextView titel;
@@ -35,9 +37,9 @@ public class Anzeige extends AppCompatActivity {
         }
         System.out.println("The given id is: " + id);
         ab = new Absence();
-
         try {
             ab.setId(id);
+            System.out.println("Ruceckgabe mit ID: " + ab.getTitel());
             titel.setText(ab.getTitel());
             datumanfang.setText(ab.getDatum_beginn());
             datumende.setText(ab.getDatum_ende());
