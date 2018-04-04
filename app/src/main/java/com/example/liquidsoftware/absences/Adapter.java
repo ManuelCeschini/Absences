@@ -23,7 +23,6 @@ public class Adapter extends ArrayAdapter<Absence> {
         public TextView titel;
         public TextView datum_anfang;
         public TextView datum_ende;
-        //public TextView begruendung;
     }
 
     public Adapter(Context context, ArrayList<Absence> params){
@@ -43,7 +42,6 @@ public class Adapter extends ArrayAdapter<Absence> {
             viewHolder.titel = (TextView) converView.findViewById(R.id.titel);
             viewHolder.datum_anfang = (TextView) converView.findViewById(R.id.datum_anfang);
             viewHolder.datum_ende = (TextView) converView.findViewById(R.id.datum_ende);
-            //viewHolder.begruendung = (TextView) converView.findViewById(R.id.begruendung);
             converView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)converView.getTag();
@@ -51,7 +49,6 @@ public class Adapter extends ArrayAdapter<Absence> {
         viewHolder.titel.setText(params.getTitel());
         viewHolder.datum_anfang.setText(params.getDatum_beginn());
         viewHolder.datum_ende.setText(params.getDatum_ende());
-        //viewHolder.begruendung.setText(params.getGrund());
         return converView;
     }
 
