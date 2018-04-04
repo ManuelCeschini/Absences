@@ -13,13 +13,15 @@ public class AbsencesClient {
         client = new AsyncHttpClient();
     }
 
-    public String getAPIUrl() {
+    public String getAPIUrl(int id) {
         String url = API_BASE_URL;
         url += "Absences_Webservice/";
+        url += "?absenz=";
+        url += id;
         return url;
     }
 
-    public void getAbsence(JsonHttpResponseHandler handler) {
-         client.get(getAPIUrl(), handler);
+    public void getAbsence(JsonHttpResponseHandler handler, int id) {
+         client.get(getAPIUrl(id), handler);
     }
 }
