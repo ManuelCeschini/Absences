@@ -8,6 +8,8 @@
         android:id="@+id/titel"
         android:textSize="22dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         />
 
     <TextView
@@ -17,6 +19,8 @@
         android:textSize="20dp"
         android:layout_below="@id/titel"
         android:gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -26,6 +30,8 @@
         android:layout_below="@+id/datum_anfang"
         android:gravity="center"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         />
 
     <!--<TextView

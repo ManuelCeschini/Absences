@@ -39,6 +39,7 @@ public class Anzeige extends AppCompatActivity {
         ab = new Absence();
         try {
             ab.setId(id);
+
             System.out.println("Ruceckgabe mit ID: " + ab.getTitel());
             titel.setText(ab.getTitel());
             datumanfang.setText(ab.getDatum_beginn());
