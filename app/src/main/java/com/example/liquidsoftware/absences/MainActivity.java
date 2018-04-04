@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         schueler = new Schueler();
-        while (logedin == false){
-            login();
-        }
+        //while (logedin == false){
+        //    login();
+        //}
         lv = (ListView) findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
