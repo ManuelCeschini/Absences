@@ -38,18 +38,20 @@ public class MainActivity extends AppCompatActivity {
     ListView lv;
     AbsencesClient ac;
     Adapter adapter;
+    private Schueler schueler;
+    private boolean logedin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //login();
+        schueler = new Schueler();
+        while (logedin == false){
+            login();
+        }
         lv = (ListView) findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
-        /*for (int i = 0; i < 10; i++) {
-            arr.add(new Absence());
-        }*/
         adapter = new Adapter(this, arr);
         try {
             if (adapter.getCount() == 0) {
@@ -73,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
-
         });
     }
 
@@ -85,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.setClassName(getPackageName(), getPackageName() + ".Login");
                 startActivity(intent);
             }
-
         });
     }
 
