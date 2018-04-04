@@ -61,19 +61,13 @@ public class Absence {
 
     public static Absence fromJSON(JSONObject o){
         Absence abs = new Absence();
-        try {/*
-            if (o.has("cover_edition_key"))  {
-                abc.id = o.getString("cover_edition_key");
-            } else if(o.has("edition_key")) {
-                final JSONArray ids = o.getJSONArray("edition_key");
-                abc.id = ids.getString(0);
-            }
-            abc.titel = o.has("title_suggest") ? o.getString("title_suggest") : "";*/
+        try {
             abs.id = o.getInt("absenz_id");
             abs.titel = o.getString("titel");
             abs.grund = o.getString("grund");
             abs.datum_beginn = o.getString("datum_beginn");
             abs.datum_ende = o.getString("datum_ende");
+            System.out.println("Data from Abscence: "+ o.getString("titel"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -94,16 +88,4 @@ public class Absence {
         }
         return absences;
     }
-    /*private static String findeAutor(JSONObject o) {
-        String result = "";
-        try {
-            final JSONArray aJSONA = o.getJSONArray("author_name");
-            for (int i = 0; i < aJSONA.length(); i++) {
-                result = result + aJSONA.getString(i) + "; ";
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }*/
 }

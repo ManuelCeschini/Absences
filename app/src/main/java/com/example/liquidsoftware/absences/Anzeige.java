@@ -3,49 +3,70 @@ package com.example.liquidsoftware.absences;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.sql.SQLOutput;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class Anzeige extends AppCompatActivity {
 
+    int id;
     TextView titel;
     TextView datumanfang;
     TextView datumende;
     TextView begruendung;
     Absence ab;
-    int id;
+    AbsencesClient ac;
 
-    public Anzeige(){
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ab = new Absence();
+        ac = new AbsencesClient();
+        Intent ii = getIntent();
+        Bundle bundle = ii.getExtras();
+        if(bundle != null){
+            id = bundle.getInt("position") + 1;
+        }
+        System.out.println("The given id is: " + id);
+
+        try {
+            fetchAbsenzen();
+        }catch (Exception e){
+            System.out.println("Fail to lad fetchAbsenzen in Anzeige: " + e);
+        }
         titel = (TextView)findViewById(R.id.AnzeigeTitel);
         datumanfang = (TextView)findViewById(R.id.AnzeigeDatumStart);
         datumende = (TextView)findViewById(R.id.AnzeigeDatumEnde);
         begruendung = (TextView)findViewById(R.id.AnzeigeBegruendung);
 
-        Intent ii = getIntent();
-        Bundle bundle = ii.getExtras();
-        if(bundle != null){
-            id = bundle.getInt("position");
-        }
-        System.out.println("The given id is: " + id);
-        ab = new Absence();
         try {
-            ab.setId(id);
-            System.out.println("Rueckgabe mit ID: " + ab.getTitel());
             titel.setText(ab.getTitel());
             datumanfang.setText(ab.getDatum_beginn());
             datumende.setText(ab.getDatum_ende());
             begruendung.setText(ab.getGrund());
-        }catch(Exception e){
-            System.out.println("Fail load params from Anzeige");
+        }catch (Exception e){
+            System.out.println("Fail to load params in Anzeige: " + e);
         }
+    }
+    public void fetchAbsenzen(){
+        ac.getAbsence(new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                JSONObject o = null;
+                if (response != null) {
+                    try {
+                        o = response.getJSONObject("absenz");
+                        ab = Absence.fromJSON(o);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, id);
     }
 }

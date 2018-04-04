@@ -30,8 +30,6 @@ public class Adapter extends ArrayAdapter<Absence> {
     }
 
 
-
-
     public View getView(int position, View converView, ViewGroup viewGroup){
         Absence params = getItem(position);
         ViewHolder viewHolder;
