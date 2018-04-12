@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response != null) {
                     try {
                         arr = response.getJSONArray("absenz");
+
                         absences = Absence.fromJSON(arr);
                         adapter.addAll(absences);
                     } catch (JSONException e) {

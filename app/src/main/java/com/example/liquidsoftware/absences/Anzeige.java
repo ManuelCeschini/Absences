@@ -3,12 +3,17 @@ package com.example.liquidsoftware.absences;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -57,12 +62,12 @@ public class Anzeige extends AppCompatActivity {
     public void fetchAbsenzen(){
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                JSONObject o = null;
                 if (response != null) {
                     try {
-                        o = response.getJSONObject("absenz");
-                        ab = Absence.fromJSON(o);
-                    } catch (JSONException e) {
+                        Absence a = Absence.fromJSON(response);
+                        ab = a;
+                        Log.w("JSON","" +a.toString());
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
