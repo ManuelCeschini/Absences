@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +35,10 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-    View convertView;
+    ProgressBar ladekreis;
+    SwipeRefreshLayout swipeRefreshLayout;
     ListView lv;
     AbsencesClient ac;
     Adapter adapter;
@@ -46,11 +49,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ladekreis = findViewById(R.id.ladekreis_main);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchAbsenzen();
+            }
+        });
         schueler = new Schueler();
         //while (logedin == false){
         //    login();
         //}
-        lv = (ListView) findViewById(R.id.listView1);
+        lv = findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
@@ -101,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //ArrayList<Absence> absences = new ArrayList<>();
     public void fetchAbsenzen() {
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -110,16 +120,22 @@ public class MainActivity extends AppCompatActivity {
                 if (response != null) {
                     try {
                         arr = response.getJSONArray("absenz");
-
                         absences = Absence.fromJSON(arr);
+                        adapter.clear();
                         adapter.addAll(absences);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                ladekreis.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
             }
-    }, 0);
-        //return absences;
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(MainActivity.super.getApplicationContext(), "Laden der Daten fehlgeschlagen", Toast.LENGTH_SHORT).show();
+                ladekreis.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 0);
     }
 }
 

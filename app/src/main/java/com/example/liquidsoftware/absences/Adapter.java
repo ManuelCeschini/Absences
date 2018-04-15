@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class Adapter extends ArrayAdapter<Absence> {
 
-
-
     private static class ViewHolder {
         public TextView titel;
         public TextView datum_anfang;
@@ -37,9 +35,9 @@ public class Adapter extends ArrayAdapter<Absence> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             converView = inflater.inflate(R.layout.item, viewGroup, false);
-            viewHolder.titel = (TextView) converView.findViewById(R.id.titel);
-            viewHolder.datum_anfang = (TextView) converView.findViewById(R.id.datum_anfang);
-            viewHolder.datum_ende = (TextView) converView.findViewById(R.id.datum_ende);
+            viewHolder.titel = converView.findViewById(R.id.titel);
+            viewHolder.datum_anfang = converView.findViewById(R.id.datum_anfang);
+            viewHolder.datum_ende = converView.findViewById(R.id.datum_ende);
             converView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder)converView.getTag();

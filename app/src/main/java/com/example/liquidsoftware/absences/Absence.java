@@ -58,7 +58,6 @@ public class Absence {
     }
 
 
-
     public static Absence fromJSON(JSONObject o){
         Absence abs = new Absence();
         try {
@@ -67,13 +66,11 @@ public class Absence {
             abs.grund = o.getString("grund");
             abs.datum_beginn = o.getString("datum_beginn");
             abs.datum_ende = o.getString("datum_ende");
-            System.out.println("Data from Abscence: "+ o.getString("titel"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return abs;
     }
-
 
     public static ArrayList<Absence> fromJSON(JSONArray jsonArray) {
         ArrayList<Absence> absences = new ArrayList<>();

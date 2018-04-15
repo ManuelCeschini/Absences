@@ -1,9 +1,12 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,54 +27,70 @@ public class Anzeige extends AppCompatActivity {
     TextView datumanfang;
     TextView datumende;
     TextView begruendung;
+    SwipeRefreshLayout swipeRefreshLayout;
     Absence ab;
     AbsencesClient ac;
-
+    ProgressBar ladekreis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_anzeige);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_anzeige);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchAbsenzen();
+            }
+        });
         ab = new Absence();
         ac = new AbsencesClient();
         Intent ii = getIntent();
         Bundle bundle = ii.getExtras();
+        ladekreis = findViewById(R.id.ladekreis_anzeige);
         if(bundle != null){
             id = bundle.getInt("position") + 1;
         }
-        System.out.println("The given id is: " + id);
-
         try {
             fetchAbsenzen();
         }catch (Exception e){
-            System.out.println("Fail to lad fetchAbsenzen in Anzeige: " + e);
+            System.out.println("Failed to load fetchAbsenzen in Anzeige: " + e);
         }
-        titel = (TextView)findViewById(R.id.AnzeigeTitel);
-        datumanfang = (TextView)findViewById(R.id.AnzeigeDatumStart);
-        datumende = (TextView)findViewById(R.id.AnzeigeDatumEnde);
-        begruendung = (TextView)findViewById(R.id.AnzeigeBegruendung);
 
-        try {
-            titel.setText(ab.getTitel());
-            datumanfang.setText(ab.getDatum_beginn());
-            datumende.setText(ab.getDatum_ende());
-            begruendung.setText(ab.getGrund());
-        }catch (Exception e){
-            System.out.println("Fail to load params in Anzeige: " + e);
-        }
     }
     public void fetchAbsenzen(){
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (response != null) {
                     try {
-                        Absence a = Absence.fromJSON(response);
-                        ab = a;
-                        Log.w("JSON","" +a.toString());
+                        ab = Absence.fromJSON(response);
+                        assignParams();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+                ladekreis.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(Anzeige.super.getApplicationContext(), "Laden der Daten fehlgeschlagen", Toast.LENGTH_SHORT).show();
+                ladekreis.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
             }
         }, id);
+    }
+    public void assignParams() {
+        titel = findViewById(R.id.AnzeigeTitel);
+        datumanfang = findViewById(R.id.AnzeigeDatumStart);
+        datumende = findViewById(R.id.AnzeigeDatumEnde);
+        begruendung = findViewById(R.id.AnzeigeBegruendung);
+        try {
+            titel.setText(ab.getTitel());
+            datumanfang.setText(ab.getDatum_beginn());
+            datumende.setText(ab.getDatum_ende());
+            begruendung.setText(ab.getGrund());
+        }catch (Exception e){
+            System.out.println("Failed to load params in Anzeige: " + e);
+        }
     }
 }
