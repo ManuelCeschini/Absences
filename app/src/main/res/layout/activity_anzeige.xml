@@ -10,47 +10,92 @@
         tools:context="com.example.liquidsoftware.absences.Anzeige">
 
         <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"
+            android:text="Title:"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+        <TextView
             android:id="@+id/AnzeigeTitel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:layout_marginTop="30dp"
+            android:textSize="25dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
+            android:layout_below="@+id/textTitle"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/textDatumAnfang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="Von:"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/AnzeigeTitel"
             android:gravity="center"
             />
 
         <TextView
             android:id="@+id/AnzeigeDatumStart"
-            android:layout_below="@id/AnzeigeTitel"
+            android:layout_below="@id/textDatumAnfang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:layout_marginTop="30dp"
+            android:textSize="25dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/textDatumEnde"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="Bis:"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/AnzeigeDatumStart"
             android:gravity="center"
             />
 
         <TextView
             android:id="@+id/AnzeigeDatumEnde"
-            android:layout_below="@id/AnzeigeDatumStart"
+            android:layout_below="@id/textDatumEnde"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:gravity="center"
             />
 
+
+        <TextView
+            android:id="@+id/textBegruendung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/AnzeigeDatumEnde"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:gravity="center"
+            android:text="Grund:"
+            android:textStyle="bold"
+            />
         <TextView
             android:id="@+id/AnzeigeBegruendung"
-            android:layout_below="@id/AnzeigeDatumEnde"
+            android:layout_below="@id/textBegruendung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:gravity="center"

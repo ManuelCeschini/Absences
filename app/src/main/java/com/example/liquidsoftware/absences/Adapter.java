@@ -43,8 +43,8 @@ public class Adapter extends ArrayAdapter<Absence> {
             viewHolder = (ViewHolder)converView.getTag();
         }
         viewHolder.titel.setText(params.getTitel());
-        viewHolder.datum_anfang.setText(params.getDatum_beginn());
-        viewHolder.datum_ende.setText(params.getDatum_ende());
+        viewHolder.datum_anfang.setText("Von: " + params.getDatum_beginn());
+        viewHolder.datum_ende.setText("Bis: " + params.getDatum_ende());
         return converView;
     }
 

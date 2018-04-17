@@ -6,39 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
+    <TextView
+        android:id="@+id/re_text"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Register"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        />
+
+
     <EditText
         android:id="@+id/re_email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorAccent"
-        android:layout_marginTop="40pt"
+        android:layout_below="@id/re_text"
+        android:layout_marginTop="5pt"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:cursorVisible="false"
+        android:hint="Email"
         />
 
     <EditText
         android:id="@+id/re_password"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimaryDark"
         android:layout_below="@id/re_email"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:cursorVisible="false"
+        android:hint="Passwort"
         />
 
     <EditText
         android:id="@+id/re_password_wiederholung"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimaryDark"
         android:layout_below="@id/re_password"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:cursorVisible="false"
+        android:hint="Passwort bestätigen"
         />
 
     <Button
@@ -49,6 +74,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:text="Register"
+        android:gravity="center"
         />
 
 </RelativeLayout>

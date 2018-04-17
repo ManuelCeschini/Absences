@@ -5,56 +5,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddEntry">
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:hint="Neue Absenz"
+        android:cursorVisible="false"
+        />
+
     <TextView
+        android:id="@+id/textDate"
         android:layout_width="match_parent"
-        android:layout_height="60sp" />
+        android:layout_height="30dp"
+        android:text="Datum:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/text"
+        android:layout_marginLeft="10dp"
+        />
+
 
     <EditText
-        android:id="@+id/newTitel"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorAccent"
-        android:layout_marginTop="30pt"
+        android:id="@+id/dateBegin"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:hint="Von"
+        android:layout_below="@id/textDate"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         />
 
     <EditText
-        android:id="@+id/newAnfang"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@id/newTitel"
-        android:layout_marginTop="5dp"
+        android:id="@+id/dateEnd"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:hint="Bis"
+        android:layout_toRightOf="@+id/dateBegin"
+        android:layout_below="@id/textDate"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Zeit:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/dateBegin"
         />
 
     <EditText
-        android:id="@+id/newEnde"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorAccent"
-        android:layout_below="@id/newAnfang"
-        android:layout_marginTop="5dp"
+        android:id="@+id/timeBegin"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:hint="Von"
+        android:layout_below="@+id/textTime"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         />
+
     <EditText
-        android:id="@+id/newGrund"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@id/newEnde"
-        android:layout_marginTop="5dp"
+        android:id="@+id/timeEnd"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Bis"
+        android:layout_toRightOf="@id/dateBegin"
+        android:layout_below="@id/textTime"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        />
+
+    <EditText
+        android:id="@+id/grund"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:hint="Grund"
+        android:cursorVisible="false"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/timeEnd"
         />
 
     <Button
+        android:id="@+id/newEntry"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/newGrund"
+        android:layout_below="@+id/grund"
+        android:text="Erstellen"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

@@ -85,10 +85,10 @@ public class Anzeige extends AppCompatActivity {
         datumende = findViewById(R.id.AnzeigeDatumEnde);
         begruendung = findViewById(R.id.AnzeigeBegruendung);
         try {
-            titel.setText("Titel:\n" + ab.getTitel());
-            datumanfang.setText("Anfang:\n" +ab.getDatum_beginn());
-            datumende.setText("Ende:\n" +ab.getDatum_ende());
-            begruendung.setText("Begründung:\n" +ab.getGrund());
+            titel.setText(ab.getTitel());
+            datumanfang.setText(ab.getDatum_beginn());
+            datumende.setText(ab.getDatum_ende());
+            begruendung.setText(ab.getGrund());
         }catch (Exception e){
             System.out.println("Failed to load params in Anzeige: " + e);
         }
