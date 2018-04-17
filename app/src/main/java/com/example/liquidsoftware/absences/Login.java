@@ -6,6 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import cz.msebera.android.httpclient.Header;
 
 public class Login extends AppCompatActivity {
     private EditText email;
@@ -30,8 +38,8 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
 
 
-        //login();
-        debug();
+        login();
+        //debug();
         register();
     }
 
@@ -51,6 +59,22 @@ public class Login extends AppCompatActivity {
 
                 //übergabe Parameter
 
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams rp = new RequestParams();
+                rp.put("email", emailString);
+                rp.put("passwort", passwordString);
+
+                client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(Login.super.getApplicationContext(),"Nicht geklappt: " + responseString, Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Toast.makeText(Login.super.getApplicationContext(),"Geklappt: " + responseString, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
