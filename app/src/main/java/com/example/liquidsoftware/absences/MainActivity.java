@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity{
         abt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO actionButton action
+                Intent intent = new Intent();
+                intent.setClassName(getPackageName(), getPackageName() + ".AddEntry");
+                startActivity(intent);
             }
         });
     }
