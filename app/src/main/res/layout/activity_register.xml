@@ -3,115 +3,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Register">
 
-    <TextView
-        android:id="@+id/re_text"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Register"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:fontFamily="cursive"
-        android:gravity="center"
-        />
+        android:layout_height="match_parent"
+        tools:context=".Register">
 
-    <EditText
-        android:id="@+id/re_vorname"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/re_text"
-        android:layout_marginTop="5pt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:cursorVisible="false"
-        android:hint="Vorname"
-        />
+        <TextView
+            android:id="@+id/re_text"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Register"
+            android:textSize="50dp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/re_nachname"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/re_vorname"
-        android:layout_marginTop="5pt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:cursorVisible="false"
-        android:hint="Nachname"
-        />
+        <EditText
+            android:id="@+id/re_vorname"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_text"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5pt"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Vorname" />
 
-    <EditText
-        android:id="@+id/re_email"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/re_nachname"
-        android:layout_marginTop="5pt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:cursorVisible="false"
-        android:hint="Email"
-        />
+        <EditText
+            android:id="@+id/re_nachname"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_vorname"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5pt"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Nachname" />
 
-    <EditText
-        android:id="@+id/re_password"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/re_email"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:cursorVisible="false"
-        android:hint="Passwort"
-        />
+        <EditText
+            android:id="@+id/re_email"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_nachname"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5pt"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Email" />
 
-    <EditText
-        android:id="@+id/re_password_wiederholung"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/re_password"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:cursorVisible="false"
-        android:hint="Passwort bestätigen"
-        />
+        <EditText
+            android:id="@+id/re_password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_email"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Passwort"
+            android:inputType="textPassword" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sv_klasse" />
+        <EditText
+            android:id="@+id/re_password_wiederholung"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_password"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Passwort bestätigen"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/re_register"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/re_password_wiederholung"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Register"
-        android:gravity="center"
-        />
+        <ScrollView
+            android:id="@+id/sv_klasse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/re_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/re_password_wiederholung"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#11AAC4"
+            android:gravity="center"
+            android:text="Register" />
+
+        <Button
+            android:id="@+id/entryAbbrechen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/re_register"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#E81F3F"
+            android:text="Abbrechen"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
     </ScrollView>

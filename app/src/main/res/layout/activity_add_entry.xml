@@ -108,10 +108,24 @@
         android:layout_height="50dp"
         android:layout_below="@+id/grund"
         android:text="Erstellen"
+        android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#11AAC4"
+        />
+
+    <Button
+        android:id="@+id/entryAbbrechen"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/newEntry"
+        android:text="Abbrechen"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#E81F3F"
         />
 
 </RelativeLayout>

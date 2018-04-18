@@ -22,6 +22,7 @@ public class AddEntry extends AppCompatActivity {
     public TextView timeBegin;
     public TextView timeEnd;
     public Button bt;
+    public Button btAb;
 
     public String dateBeginString;
     public String dateEndString;
@@ -40,6 +41,7 @@ public class AddEntry extends AppCompatActivity {
         timeBegin = (TextView) findViewById(R.id.timeBegin);
         timeEnd =   (TextView) findViewById(R.id.timeEnd);
         bt =        (Button)   findViewById(R.id.newEntry);
+        btAb =      (Button)   findViewById(R.id.entryAbbrechen);
 
         /*
         timeBegin.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +67,12 @@ public class AddEntry extends AppCompatActivity {
                 timeBeginString = timeBegin.getText().toString();
                 timeEndString = timeEnd.getText().toString();
                 //Übergabe Parameter
+            }
+        });
+
+        btAb.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                finish();
             }
         });
     }
