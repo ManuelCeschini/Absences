@@ -80,10 +80,10 @@
         android:id="@+id/timeEnd"
         android:layout_width="150dp"
         android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
+
         android:hint="Bis"
         android:textSize="22dp"
-        android:layout_toRightOf="@id/dateBegin"
+        android:layout_toRightOf="@id/timeBegin"
         android:layout_below="@id/textTime"
         android:layout_marginLeft="10dp"
         android:background="@drawable/textlines"
@@ -98,7 +98,7 @@
         android:hint="Grund"
         android:cursorVisible="false"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/timeEnd"
+        android:layout_below="@id/timeBegin"
         android:maxLength="43"
         />
 

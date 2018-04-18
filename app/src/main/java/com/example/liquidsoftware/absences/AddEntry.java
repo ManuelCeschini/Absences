@@ -51,16 +51,16 @@ public class AddEntry extends AppCompatActivity {
             }
         });
         */
-        tBegin();
-        tEnd();
         dBegin();
         dEnd();
+        tBegin();
+        tEnd();
         button();
 
     }
 
     public void button(){
-        timeBegin.setOnClickListener(new View.OnClickListener(){
+        bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 dateBeginString = dateBegin.getText().toString();
                 dateEndString = dateEnd.getText().toString();
@@ -89,7 +89,6 @@ public class AddEntry extends AppCompatActivity {
                         timeBegin.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//24 Stunden Format
-                mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
             }
@@ -108,7 +107,6 @@ public class AddEntry extends AppCompatActivity {
                         timeEnd.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//24 Stunden Format
-                mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
             }
@@ -128,7 +126,6 @@ public class AddEntry extends AppCompatActivity {
                         dateBegin.setText(i2 + "/" + i1 + "/" + i);
                     }
                 }, day, month, year);
-                mDatePicker.setTitle("Select Time");
                 mDatePicker.show();
             }
         });
@@ -149,7 +146,6 @@ public class AddEntry extends AppCompatActivity {
                             dateEnd.setText(i2 + "/" + i1 + "/" + i);
                         }
                     }, day, month, year);
-                    mDatePicker.setTitle("Select Time");
                     mDatePicker.show();
                 }
             });
