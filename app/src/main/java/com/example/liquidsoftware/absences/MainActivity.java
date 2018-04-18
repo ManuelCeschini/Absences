@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity{
         });
         schueler = new Schueler();
         //while (logedin == false){
-            login();
+            //login();
         //}
         lv = findViewById(R.id.listView1);
         ac = new AbsencesClient();

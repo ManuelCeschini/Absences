@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
 
 
-        login();
+        //login();
         //debug();
         //register();
     }
