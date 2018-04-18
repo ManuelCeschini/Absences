@@ -27,13 +27,10 @@ public class Anzeige extends AppCompatActivity {
     TextView datumanfang;
     TextView datumende;
     TextView begruendung;
-
     TextView textTitle;
     TextView textDatumAnfang;
     TextView textDatumEnde;
     TextView textBegruendung;
-
-
 
     SwipeRefreshLayout swipeRefreshLayout;
     Absence ab;
