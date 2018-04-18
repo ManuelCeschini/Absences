@@ -10,8 +10,11 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -22,7 +25,8 @@ public class Login extends AppCompatActivity {
     private String passwordString;
     Button login;
     Button register;
-
+    AbsencesClient ac;
+    Schueler s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,8 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
 
 
-        //login();
-        debug();
+        login();
+        //debug();
         //register();
     }
 

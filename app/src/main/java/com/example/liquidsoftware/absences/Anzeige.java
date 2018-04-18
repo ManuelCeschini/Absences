@@ -82,7 +82,7 @@ public class Anzeige extends AppCompatActivity {
                 ladekreis.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
             }
-        }, id);
+        }, "absenz", id);
     }
     public void assignParams() {
         titel = findViewById(R.id.AnzeigeTitel);
