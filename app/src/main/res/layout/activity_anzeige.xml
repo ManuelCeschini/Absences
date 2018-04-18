@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:layout_marginTop="30dp"
-            android:text="Title:"
             android:textStyle="bold"
             android:gravity="center"
             />
@@ -35,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:text="Von:"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
             android:layout_below="@id/AnzeigeTitel"
@@ -58,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:text="Bis:"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
             android:layout_below="@id/AnzeigeDatumStart"
@@ -87,7 +84,6 @@
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:gravity="center"
-            android:text="Grund:"
             android:textStyle="bold"
             />
         <TextView
@@ -95,7 +91,7 @@
             android:layout_below="@id/textBegruendung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:gravity="center"

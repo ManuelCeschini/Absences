@@ -27,6 +27,14 @@ public class Anzeige extends AppCompatActivity {
     TextView datumanfang;
     TextView datumende;
     TextView begruendung;
+
+    TextView textTitle;
+    TextView textDatumAnfang;
+    TextView textDatumEnde;
+    TextView textBegruendung;
+
+
+
     SwipeRefreshLayout swipeRefreshLayout;
     Absence ab;
     AbsencesClient ac;
@@ -84,11 +92,20 @@ public class Anzeige extends AppCompatActivity {
         datumanfang = findViewById(R.id.AnzeigeDatumStart);
         datumende = findViewById(R.id.AnzeigeDatumEnde);
         begruendung = findViewById(R.id.AnzeigeBegruendung);
+        textTitle = (TextView) findViewById(R.id.textTitle);
+        textDatumAnfang = (TextView) findViewById(R.id.textDatumAnfang);
+        textDatumEnde = (TextView) findViewById(R.id.textDatumEnde);
+        textBegruendung = (TextView) findViewById(R.id.textBegruendung);
         try {
             titel.setText(ab.getTitel());
             datumanfang.setText(ab.getDatum_beginn());
             datumende.setText(ab.getDatum_ende());
             begruendung.setText(ab.getGrund());
+            textTitle.setText("Titel:");
+            textDatumAnfang.setText("Von:");
+            textDatumEnde.setText("Bis: ");
+            textBegruendung.setText("Begründung");
+
         }catch (Exception e){
             System.out.println("Failed to load params in Anzeige: " + e);
         }

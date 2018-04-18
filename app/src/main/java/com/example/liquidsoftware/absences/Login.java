@@ -38,16 +38,15 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
 
 
-        login();
-        //debug();
-        register();
+        //login();
+        debug();
+        //register();
     }
 
     public void debug(){
         Intent intent = new Intent();
         intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
         startActivity(intent);
-
     }
 
     public void login() {
