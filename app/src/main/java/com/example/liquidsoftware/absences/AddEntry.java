@@ -1,10 +1,12 @@
 package com.example.liquidsoftware.absences;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -97,39 +99,42 @@ public class AddEntry extends AppCompatActivity {
     public void dBegin(){
         dateBegin.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        dateBegin.setText(selectedHour + ":" + selectedMinute);
+                Calendar mcurrentDate = Calendar.getInstance();
+                int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                int month = mcurrentDate.get(Calendar.MONTH);
+                int year = mcurrentDate.get(Calendar.YEAR);
+                DatePickerDialog mDatePicker;
+                mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        dateBegin.setText(i + ":" + i1 + ":" + i2);
                     }
-                }, hour, minute, true);//24 Stunden Format
-                mTimePicker.setTitle("Select Time");
-                mTimePicker.show();
+                }, day, month, year);
+                mDatePicker.setTitle("Select Time");
+                mDatePicker.show();
 
             }
         });
 
     }
     public void dEnd(){
-        dateEnd.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        dateEnd.setText(selectedHour + ":" + selectedMinute);
-                    }
-                }, hour, minute, true);//24 Stunden Format
-                mTimePicker.setTitle("Select Time");
-                mTimePicker.show();
+            dateEnd.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v) {
+                    Calendar mcurrentDate = Calendar.getInstance();
+                    int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                    int month = mcurrentDate.get(Calendar.MONTH);
+                    int year = mcurrentDate.get(Calendar.YEAR);
+                    DatePickerDialog mDatePicker;
 
-            }
-        });
-
+                    mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                            dateBegin.setText(i + ":" + i1 + ":" + i2);
+                        }
+                    }, day, month, year);
+                    mDatePicker.setTitle("Select Time");
+                    mDatePicker.show();
+                }
+            });
     }
 }
