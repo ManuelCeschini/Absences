@@ -43,14 +43,6 @@ public class AddEntry extends AppCompatActivity {
         bt =        (Button)   findViewById(R.id.newEntry);
         btAb =      (Button)   findViewById(R.id.entryAbbrechen);
 
-        /*
-        timeBegin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("manuellllo", "hallo");
-            }
-        });
-        */
         dBegin();
         dEnd();
         tBegin();
@@ -86,7 +78,20 @@ public class AddEntry extends AppCompatActivity {
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        timeBegin.setText(selectedHour + ":" + selectedMinute);
+                        int[] params = new int[3];
+                        params[0] = String.valueOf(selectedHour).length();
+                        params[1] = String.valueOf(selectedMinute).length();
+
+                        String z0 = "";
+                        String z1 = "";
+
+                        if (params[0] == 1){
+                            z0 = "0";
+                        }
+                        if (params[1] == 1){
+                            z1 = "0";
+                        }
+                        timeBegin.setText(z0 + selectedHour + ":" +  z1 + selectedMinute);
                     }
                 }, hour, minute, true);//24 Stunden Format
                 mTimePicker.show();
@@ -104,7 +109,20 @@ public class AddEntry extends AppCompatActivity {
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        timeEnd.setText(selectedHour + ":" + selectedMinute);
+                        int[] params = new int[3];
+                        params[0] = String.valueOf(selectedHour).length();
+                        params[1] = String.valueOf(selectedMinute).length();
+
+                        String z0 = "";
+                        String z1 = "";
+
+                        if (params[0] == 1){
+                            z0 = "0";
+                        }
+                        if (params[1] == 1){
+                            z1 = "0";
+                        }
+                        timeEnd.setText(z0 + selectedHour + ":" +  z1 + selectedMinute);
                     }
                 }, hour, minute, true);//24 Stunden Format
                 mTimePicker.show();
@@ -123,9 +141,28 @@ public class AddEntry extends AppCompatActivity {
                 mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        dateBegin.setText(i2 + "/" + i1 + "/" + i);
+                        int[] params = new int[3];
+                        params[0] = String.valueOf(i).length();
+                        params[1] = String.valueOf(i1).length();
+                        params[2] = String.valueOf(i2).length();
+
+                        String z0 = "";
+                        String z1 = "";
+                        String z2 = "";
+
+                        if (params[0] == 1){
+                            z0 = "0";
+                        }
+                        if (params[1] == 1){
+                            z1 = "0";
+                        }
+                        if (params[2] == 1){
+                            z2 = "0";
+                        }
+                        i1 = i1 + 1;
+                        dateBegin.setText(z2 + i2 + "/" + z1 + i1 + "/" + z0 + i);
                     }
-                }, day, month, year);
+                }, year, month, day);
                 mDatePicker.show();
             }
         });
@@ -143,9 +180,29 @@ public class AddEntry extends AppCompatActivity {
                     mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            dateEnd.setText(i2 + "/" + i1 + "/" + i);
+                             int[] params = new int[3];
+                             params[0] = String.valueOf(i).length();
+                             params[1] = String.valueOf(i1).length();
+                             params[2] = String.valueOf(i2).length();
+
+                             String z0 = "";
+                             String z1 = "";
+                             String z2 = "";
+
+                                if (params[0] == 1){
+                                    z0 = "0";
+                                }
+                                if (params[1] == 1){
+                                    z1 = "0";
+                                }
+                                if (params[2] == 1){
+                                    z2 = "0";
+                                }
+                            i1 = i1 + 1;
+                            dateEnd.setText(z2 + i2 + "/" + z1 + i1 + "/" + z0 + i);
+
                         }
-                    }, day, month, year);
+                    }, year, month, day);
                     mDatePicker.show();
                 }
             });
