@@ -17,6 +17,7 @@ import cz.msebera.android.httpclient.Header;
 public class Register extends AppCompatActivity {
 
     Button register;
+    Button registerAbbrechen;
     private EditText email;
     private EditText password;
     private EditText RePassword;
@@ -29,6 +30,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         register = findViewById(R.id.re_register);
+        registerAbbrechen = findViewById(R.id.registerAbbrechen);
         email = findViewById(R.id.re_email);
         password = findViewById(R.id.re_password);
         RePassword = findViewById(R.id.re_password_wiederholung);
@@ -64,6 +66,11 @@ public class Register extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+        registerAbbrechen.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                finish();
             }
         });
     }

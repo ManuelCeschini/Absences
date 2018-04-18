@@ -51,10 +51,10 @@ public class AddEntry extends AppCompatActivity {
             }
         });
         */
-        dBegin();
-        dEnd();
         tBegin();
         tEnd();
+        dBegin();
+        dEnd();
         button();
 
     }
