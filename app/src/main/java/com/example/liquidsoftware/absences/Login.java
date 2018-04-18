@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONObject;
 
@@ -42,7 +40,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
 
 
-        //login();
+        login();
         //debug();
         //register();
     }
@@ -67,15 +65,20 @@ public class Login extends AppCompatActivity {
                 rp.put("email", emailString);
                 rp.put("passwort", passwordString);
 
-                client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new TextHttpResponseHandler() {
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        Toast.makeText(Login.super.getApplicationContext(),"Nicht geklappt: " + responseString, Toast.LENGTH_LONG).show();
+                client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new JsonHttpResponseHandler(){
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        if (response != null) {
+                            try {
+                                s = Schueler.fromJSON(response);
+                                Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
+                                //TODO: Hier die Login Daten (in Schueler s) weiterverarbreiten.
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                        Toast.makeText(Login.super.getApplicationContext(),"Geklappt: " + responseString, Toast.LENGTH_LONG).show();
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(Login.super.getApplicationContext(), "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
