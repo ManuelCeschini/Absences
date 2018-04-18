@@ -60,6 +60,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="Login"
+        android:background="#11AAC4"
         android:gravity="center"
         />
     <Button
@@ -70,6 +71,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="#11AAC4"
         android:gravity="center"
         android:text="Register"
         />
