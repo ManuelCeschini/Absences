@@ -4,19 +4,23 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class AddEntry extends AppCompatActivity {
-    public EditText dateBegin;
-    public EditText dateEnd;
-    public EditText timeBegin;
-    public EditText timeEnd;
+    public EditText titleText;
+    public TextView dateBegin;
+    public TextView dateEnd;
+    public TextView timeBegin;
+    public TextView timeEnd;
     public Button bt;
 
     public String dateBeginString;
@@ -30,12 +34,21 @@ public class AddEntry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-        dateBegin = (EditText) findViewById(R.id.dateBegin);
-        dateEnd = (EditText) findViewById(R.id.dateEnd);
-        timeBegin = (EditText) findViewById(R.id.timeBegin);
-        timeEnd = (EditText) findViewById(R.id.timeEnd);
-        bt = (Button) findViewById(R.id.newEntry);
+        titleText = (EditText) findViewById(R.id.Titletext);
+        dateBegin = (TextView) findViewById(R.id.dateBegin);
+        dateEnd =   (TextView) findViewById(R.id.dateEnd);
+        timeBegin = (TextView) findViewById(R.id.timeBegin);
+        timeEnd =   (TextView) findViewById(R.id.timeEnd);
+        bt =        (Button)   findViewById(R.id.newEntry);
 
+        /*
+        timeBegin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("manuellllo", "hallo");
+            }
+        });
+        */
         dBegin();
         dEnd();
         tBegin();
@@ -52,10 +65,8 @@ public class AddEntry extends AppCompatActivity {
                 timeBeginString = timeBegin.getText().toString();
                 timeEndString = timeEnd.getText().toString();
                 //Übergabe Parameter
-
             }
         });
-
     }
 
     public void tBegin(){
@@ -94,7 +105,6 @@ public class AddEntry extends AppCompatActivity {
 
             }
         });
-
     }
     public void dBegin(){
         dateBegin.setOnClickListener(new View.OnClickListener(){
@@ -107,12 +117,11 @@ public class AddEntry extends AppCompatActivity {
                 mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        dateBegin.setText(i + ":" + i1 + ":" + i2);
+                        dateBegin.setText(i2 + "/" + i1 + "/" + i);
                     }
                 }, day, month, year);
                 mDatePicker.setTitle("Select Time");
                 mDatePicker.show();
-
             }
         });
 
@@ -129,7 +138,7 @@ public class AddEntry extends AppCompatActivity {
                     mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            dateBegin.setText(i + ":" + i1 + ":" + i2);
+                            dateEnd.setText(i2 + "/" + i1 + "/" + i);
                         }
                     }, day, month, year);
                     mDatePicker.setTitle("Select Time");

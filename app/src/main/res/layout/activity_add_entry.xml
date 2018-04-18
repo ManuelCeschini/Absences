@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AddEntry">
     <EditText
-        android:id="@+id/text"
+        android:id="@+id/Titletext"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:textSize="40dp"
@@ -25,28 +25,32 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/text"
+        android:layout_below="@id/Titletext"
         android:layout_marginLeft="10dp"
         />
 
 
-    <EditText
+    <TextView
         android:id="@+id/dateBegin"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="45dp"
         android:hint="Von"
+        android:textSize="22dp"
         android:layout_below="@id/textDate"
         android:layout_marginLeft="10dp"
+        android:background="@drawable/textlines"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/dateEnd"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="45dp"
         android:hint="Bis"
+        android:textSize="22dp"
         android:layout_toRightOf="@+id/dateBegin"
         android:layout_below="@id/textDate"
         android:layout_marginLeft="10dp"
+        android:background="@drawable/textlines"
         />
 
     <TextView
@@ -61,24 +65,28 @@
         android:layout_below="@id/dateBegin"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/timeBegin"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="45dp"
         android:hint="Von"
+        android:textSize="22dp"
         android:layout_below="@+id/textTime"
         android:layout_marginLeft="10dp"
+        android:background="@drawable/textlines"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/timeEnd"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="45dp"
         android:layout_centerHorizontal="true"
         android:hint="Bis"
+        android:textSize="22dp"
         android:layout_toRightOf="@id/dateBegin"
         android:layout_below="@id/textTime"
         android:layout_marginLeft="10dp"
+        android:background="@drawable/textlines"
         />
 
     <EditText
