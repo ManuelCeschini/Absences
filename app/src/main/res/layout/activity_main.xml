@@ -7,8 +7,11 @@
     android:orientation="vertical"
     tools:context="com.example.liquidsoftware.absences.MainActivity"
     android:id="@+id/swipe_refresh_layout_main">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <FrameLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -35,6 +38,18 @@
             android:layout_marginRight="20dp"
             app:srcCompat="@android:drawable/ic_menu_add" />
     </FrameLayout>
+        <!--
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/mainLayout">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                />
+        </FrameLayout>
+        -->
+    </RelativeLayout>
 
 
 </android.support.v4.widget.SwipeRefreshLayout>

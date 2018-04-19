@@ -16,7 +16,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Register"
@@ -50,10 +50,23 @@
             android:hint="Nachname" />
 
         <EditText
-            android:id="@+id/re_email"
+            android:id="@+id/re_geburtsdatum"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/re_nachname"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5pt"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:hint="Nachname" />
+
+        <EditText
+            android:id="@+id/re_email"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/re_geburtsdatum"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -105,6 +118,7 @@
             android:layout_marginTop="5dp"
             android:background="#11AAC4"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="Register" />
 
         <Button
@@ -117,7 +131,9 @@
             android:layout_marginTop="5dp"
             android:background="#E81F3F"
             android:text="Abbrechen"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"
+            />
 
     </RelativeLayout>
     </ScrollView>

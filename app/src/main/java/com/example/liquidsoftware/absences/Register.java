@@ -18,9 +18,16 @@ public class Register extends AppCompatActivity {
 
     Button register;
     Button registerAbbrechen;
+
+    private EditText name;
+    private EditText nachname;
+    private EditText geburtsdatum;
     private EditText email;
     private EditText password;
     private EditText RePassword;
+    private String nameString;
+    private String nachnameString;
+    private String geburtsdatumString;
     private String emailString;
     private String PasswordString;
     private String rePasswordString;
@@ -29,6 +36,9 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        name = findViewById(R.id.re_vorname);
+        nachname = findViewById(R.id.re_nachname);
+        geburtsdatum = findViewById(R.id.re_geburtsdatum);
         register = findViewById(R.id.re_register);
         registerAbbrechen = findViewById(R.id.registerAbbrechen);
         email = findViewById(R.id.re_email);
@@ -41,6 +51,9 @@ public class Register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nameString = name.getText().toString();
+                nachnameString = nachname.getText().toString();
+                geburtsdatumString = geburtsdatum.getText().toString();
                 emailString = email.getText().toString();
                 PasswordString = password.getText().toString();
                 rePasswordString = RePassword.getText().toString();
