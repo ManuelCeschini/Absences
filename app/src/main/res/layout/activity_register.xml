@@ -1,139 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/swipe_refresh_layout_register">
 
-    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Register">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/re_text"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="cursive"
-            android:gravity="center"
-            android:text="Register"
-            android:textSize="50dp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/re_vorname"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_text"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5pt"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Vorname" />
-
-        <EditText
-            android:id="@+id/re_nachname"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_vorname"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5pt"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Nachname" />
-
-        <EditText
-            android:id="@+id/re_geburtsdatum"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_nachname"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5pt"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Nachname" />
-
-        <EditText
-            android:id="@+id/re_email"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_geburtsdatum"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5pt"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Email" />
-
-        <EditText
-            android:id="@+id/re_password"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_email"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Passwort"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/re_password_wiederholung"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@id/re_password"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:hint="Passwort bestätigen"
-            android:inputType="textPassword" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ladekreis_register"
+            android:layout_centerInParent="true" />
 
         <ScrollView
-            android:id="@+id/sv_klasse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/scrollview_register">
+            <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Register">
+                <TextView
+                    android:id="@+id/re_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="cursive"
+                    android:gravity="center"
+                    android:text="Register"
+                    android:textSize="50dp"
+                    android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/re_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/re_password_wiederholung"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#11AAC4"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="Register" />
+                <EditText
+                    android:id="@+id/re_vorname"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_text"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5pt"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Vorname" />
 
-        <Button
-            android:id="@+id/registerAbbrechen"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/re_register"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#E81F3F"
-            android:text="Abbrechen"
-            android:textStyle="bold"
-            android:layout_marginBottom="30dp"
-            />
+                <EditText
+                    android:id="@+id/re_nachname"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_vorname"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5pt"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Nachname" />
 
+                <EditText
+                    android:id="@+id/re_geburtsdatum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_nachname"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5pt"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Geburtstag" />
+
+                <Spinner
+                    android:id="@+id/sv_klasse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_nachname"
+                    android:layout_toRightOf="@+id/re_geburtsdatum"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/re_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_geburtsdatum"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5pt"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Email" />
+
+                <EditText
+                    android:id="@+id/re_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_email"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Passwort"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:id="@+id/re_password_wiederholung"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/re_password"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:hint="Passwort bestätigen"
+                    android:inputType="textPassword" />
+
+                <Button
+                    android:id="@+id/re_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/re_password_wiederholung"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#11AAC4"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="Register" />
+
+                <Button
+                    android:id="@+id/registerAbbrechen"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/re_register"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#E81F3F"
+                    android:text="Abbrechen"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="30dp"
+                    />
+
+            </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
-    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>
