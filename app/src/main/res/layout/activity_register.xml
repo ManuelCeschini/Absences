@@ -49,7 +49,7 @@
             android:gravity="center"
             android:hint="Nachname" />
 
-        <EditText
+        <TextView
             android:id="@+id/re_geburtsdatum"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -60,7 +60,9 @@
             android:layout_marginTop="5pt"
             android:cursorVisible="false"
             android:gravity="center"
-            android:hint="Nachname" />
+            android:hint="Datum"
+            android:background="@drawable/textlines"
+            />
 
         <EditText
             android:id="@+id/re_email"

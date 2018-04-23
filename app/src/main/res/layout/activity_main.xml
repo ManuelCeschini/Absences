@@ -10,6 +10,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFF2">
+
+            <TextView
+                android:id="@+id/numberAbsences"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:textSize="30dp" />
+            <TextView
+                android:id="@+id/hAbsences"
+                android:layout_toRightOf="@+id/numberAbsences"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/percentAbsences"
+                android:layout_toRightOf="@+id/hAbsences"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textSize="30dp" />
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <FrameLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
@@ -49,6 +86,7 @@
                 />
         </FrameLayout>
         -->
+    </RelativeLayout>
     </RelativeLayout>
 
 
