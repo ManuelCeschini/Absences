@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -32,6 +33,14 @@ public class MainActivity extends AppCompatActivity{
     private boolean logedin = false;
     private String emailString;
     private String passwordString;
+    TextView numberAbsences;
+    private int numberAbsencesInt = 0;
+
+    TextView hAbsences;
+    private int hAbsencesInt = 0;
+
+    TextView percentAbsences;
+    private int percentAbsencesInt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,9 @@ public class MainActivity extends AppCompatActivity{
         });
         schueler = new Schueler();
         lv = findViewById(R.id.listView1);
+        numberAbsences = findViewById(R.id.numberAbsences);
+        hAbsences = findViewById(R.id.hAbsences);
+        percentAbsences = findViewById(R.id.percentAbsences);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
@@ -63,6 +75,27 @@ public class MainActivity extends AppCompatActivity{
         lv.setAdapter(adapter);
         anzeige();
         actionButton();
+        status();
+    }
+    public void status(){
+
+        if (numberAbsencesInt != 0){
+            numberAbsences.setText(numberAbsencesInt + "A");
+        }else{
+            numberAbsences.setText("0");
+        }
+        if (hAbsencesInt != 0){
+
+        }else{
+            hAbsences.setText("0:00h");
+        }
+        if (percentAbsencesInt != 0){
+
+        }else{
+            percentAbsences.setText("0%");
+        }
+
+        //TODO stunden und prozent felder füllen
     }
 
     public void anzeige(){
@@ -113,12 +146,14 @@ public class MainActivity extends AppCompatActivity{
                         absences = Absence.fromJSON(arr);
                         adapter.clear();
                         adapter.addAll(absences);
+                        numberAbsencesInt = absences.size(); //TODO check bug
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
                 ladekreis.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
+
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Toast.makeText(MainActivity.super.getApplicationContext(), "Laden der Daten fehlgeschlagen", Toast.LENGTH_SHORT).show();
