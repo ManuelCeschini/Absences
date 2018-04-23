@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity{
     Adapter adapter;
     private Schueler schueler;
     private boolean logedin = false;
+    private String emailString;
+    private String passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,13 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         schueler = new Schueler();
-        //while (logedin == false){
-            login();
-        //}
         lv = findViewById(R.id.listView1);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
+        Intent intent = getIntent();
+        emailString = intent.getStringExtra("email");
+        passwordString = intent.getStringExtra("password");
         try {
             if (adapter.getCount() == 0) {
                 fetchAbsenzen();

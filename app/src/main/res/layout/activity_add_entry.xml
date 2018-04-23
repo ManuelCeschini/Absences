@@ -29,15 +29,19 @@
         android:layout_marginLeft="10dp"
         />
 
-
+<RelativeLayout
+    android:id="@+id/dateZone"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:layout_below="@id/textDate"
+    android:layout_centerHorizontal="true">
     <TextView
         android:id="@+id/dateBegin"
         android:layout_width="150dp"
         android:layout_height="45dp"
+        android:gravity="center"
         android:hint="Von"
         android:textSize="22dp"
-        android:layout_below="@id/textDate"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/textlines"
         />
 
@@ -48,11 +52,10 @@
         android:hint="Bis"
         android:textSize="22dp"
         android:layout_toRightOf="@+id/dateBegin"
-        android:layout_below="@id/textDate"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/textlines"
+        android:gravity="center"
         />
-
+</RelativeLayout>
     <TextView
         android:id="@+id/textTime"
         android:layout_width="match_parent"
@@ -62,17 +65,24 @@
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
-        android:layout_below="@id/dateBegin"
+        android:layout_below="@id/dateZone"
         />
 
+<RelativeLayout
+    android:id="@+id/timeZone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/textTime"
+    android:layout_centerHorizontal="true"
+
+    >
     <TextView
         android:id="@+id/timeBegin"
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:hint="Von"
+        android:gravity="center"
         android:textSize="22dp"
-        android:layout_below="@+id/textTime"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/textlines"
         />
 
@@ -80,15 +90,13 @@
         android:id="@+id/timeEnd"
         android:layout_width="150dp"
         android:layout_height="45dp"
-
         android:hint="Bis"
+        android:gravity="center"
         android:textSize="22dp"
         android:layout_toRightOf="@id/timeBegin"
-        android:layout_below="@id/textTime"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/textlines"
         />
-
+</RelativeLayout>
     <EditText
         android:id="@+id/grund"
         android:layout_width="match_parent"
@@ -98,7 +106,7 @@
         android:hint="Grund"
         android:cursorVisible="false"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/timeBegin"
+        android:layout_below="@id/timeZone"
         android:maxLength="43"
         />
 

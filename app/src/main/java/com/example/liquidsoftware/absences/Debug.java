@@ -19,6 +19,7 @@ public class Debug extends AppCompatActivity {
     Button bt0;
     Button bt1;
     Button bt2;
+    Button bt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class Debug extends AppCompatActivity {
         bt0 = (Button) findViewById(R.id.debugBt0);
         bt1 = (Button) findViewById(R.id.debugBt1);
         bt2 = (Button) findViewById(R.id.debugBt2);
+        bt3 = (Button) findViewById(R.id.debugBt3);
         btns();
     }
 
@@ -52,6 +54,14 @@ public class Debug extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+                startActivity(intent);
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                intent.setClassName(getPackageName(), getPackageName() + ".AddEntry");
                 startActivity(intent);
             }
         });

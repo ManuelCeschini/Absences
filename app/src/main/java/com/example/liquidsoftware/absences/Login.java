@@ -1,6 +1,7 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity{
     private EditText email;
     private EditText password;
     private String emailString;
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         //buttons
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
@@ -41,14 +43,7 @@ public class Login extends AppCompatActivity {
 
 
         login();
-        //debug();
-        //register();
-    }
-
-    public void debug(){
-        Intent intent = new Intent();
-        intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
-        startActivity(intent);
+        register();
     }
 
     public void login() {
@@ -57,9 +52,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();
-
-                //übergabe Parameter
-
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams rp = new RequestParams();
                 rp.put("email", emailString);
@@ -71,7 +63,11 @@ public class Login extends AppCompatActivity {
                             try {
                                 s = Schueler.fromJSON(response);
                                 Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
-                                //TODO: Hier die Login Daten (in Schueler s) weiterverarbreiten.
+                                Intent intent = new Intent();
+                                intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+                                intent.putExtra("email", emailString);
+                                intent.putExtra("password", passwordString);
+                                startActivity(intent);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

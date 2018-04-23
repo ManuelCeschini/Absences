@@ -4,19 +4,15 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -31,6 +27,7 @@ public class Anzeige extends AppCompatActivity {
     TextView textDatumAnfang;
     TextView textDatumEnde;
     TextView textBegruendung;
+    Button deleteAnzeige;
 
     SwipeRefreshLayout swipeRefreshLayout;
     Absence ab;
@@ -42,6 +39,7 @@ public class Anzeige extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anzeige);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_anzeige);
+        deleteAnzeige = findViewById(R.id.deleteAnzeige);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -104,6 +102,9 @@ public class Anzeige extends AppCompatActivity {
             textDatumAnfang.setText("Von:");
             textDatumEnde.setText("Bis: ");
             textBegruendung.setText("Begründung:");
+
+            deleteAnzeige.setVisibility(View.VISIBLE);
+
 
         }catch (Exception e){
             System.out.println("Failed to load params in Anzeige: " + e);
