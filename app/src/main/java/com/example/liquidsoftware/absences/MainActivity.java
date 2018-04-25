@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity{
                         absences = Absence.fromJSON(arr);
                         adapter.clear();
                         adapter.addAll(absences);
-                        numberAbsencesInt = absences.size(); //TODO check bug
+                        numberAbsencesInt = arr.length(); //TODO check bug
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
