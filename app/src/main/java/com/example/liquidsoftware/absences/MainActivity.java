@@ -34,12 +34,10 @@ public class MainActivity extends AppCompatActivity{
     private String emailString;
     private String passwordString;
     TextView numberAbsences;
-    private int numberAbsencesInt = 0;
-
     TextView hAbsences;
-    private int hAbsencesInt = 0;
-
     TextView percentAbsences;
+    private int numberAbsencesInt = 0;
+    private int hAbsencesInt = 0;
     private int percentAbsencesInt = 0;
 
     @Override
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
         lv.setAdapter(adapter);
         anzeige();
         actionButton();
-        status();
+
     }
     public void status(){
 
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
             percentAbsences.setText("0%");
         }
 
-        //TODO stunden und prozent felder füllen
+        //TODO Jürgen: stunden und prozent felder füllen
     }
 
     public void anzeige(){
@@ -146,7 +144,8 @@ public class MainActivity extends AppCompatActivity{
                         absences = Absence.fromJSON(arr);
                         adapter.clear();
                         adapter.addAll(absences);
-                        numberAbsencesInt = arr.length(); //TODO check bug
+                        numberAbsencesInt = absences.size();
+                        status();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
