@@ -113,8 +113,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View view) {
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();
-                emailString = emailString.toLowerCase();
-                emailString = emailString.trim();
+                emailString = prepareString(emailString);
                 System.out.println("------------------------ email: " + emailString);
                 //emailString.trim();
                 System.out.println("-----------------------------login check");
@@ -156,5 +155,11 @@ public class Login extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    public String prepareString(String email) {
+        email = email.toLowerCase();
+        email = email.trim();
+        return email;
     }
 }
