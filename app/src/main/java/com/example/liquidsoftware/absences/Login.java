@@ -48,13 +48,15 @@ public class Login extends AppCompatActivity{
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
+
+
         getpreferences();
         if (activeUserLog == true){
             System.out.println("-----------------------fastLogin check");
             fastLogin();
         }else{
-        login();
-        register();
+            login();
+            register();
         }
     }
 
@@ -62,12 +64,14 @@ public class Login extends AppCompatActivity{
         SharedPreferences.Editor editor = setPrefs.edit();
         editor.putString("Email", emailString);
         editor.putString("Password", passwordString);
+        //editor.clear();
+        //editor.commit();
         editor.apply();
     }
 
     private void getpreferences(){
-        String email = getPrefs.getString("Email", null);
-        String password = getPrefs.getString("Password", null);
+        String email = getPrefs.getString("Email", "");
+        String password = getPrefs.getString("Password", "");
         if(!email.equalsIgnoreCase("") && !password.equalsIgnoreCase(""))
         {
             activeUserLog = true;
@@ -115,9 +119,10 @@ public class Login extends AppCompatActivity{
                 RequestParams rp = new RequestParams();
                 rp.put("email", emailString);
                 rp.put("passwort", passwordString);
-
+                client.clearCredentialsProvider();
                 client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new JsonHttpResponseHandler(){
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        System.out.println("---------------------- Response: " + response);
                         if (response != null) {
                             try {
                                 s = Schueler.fromJSON(response);

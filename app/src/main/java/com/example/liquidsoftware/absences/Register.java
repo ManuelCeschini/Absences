@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,7 +37,7 @@ public class Register extends AppCompatActivity {
 
     private EditText name;
     private EditText nachname;
-    private EditText geburtsdatum;
+    private TextView geburtsdatum;
     private EditText email;
     private EditText password;
     private EditText rePassword;
