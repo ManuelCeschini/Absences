@@ -1,7 +1,9 @@
 package com.example.liquidsoftware.absences;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,9 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class Login extends AppCompatActivity{
+    SharedPreferences setPrefs;
+    SharedPreferences getPrefs;
+    private boolean activeUserLog = false;
     private EditText email;
     private EditText password;
     private String emailString;
@@ -32,6 +37,8 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setPrefs = this.getApplicationContext().getSharedPreferences("userdetails", Context.MODE_PRIVATE);
+        getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         //buttons
         login = findViewById(R.id.login);
@@ -41,9 +48,60 @@ public class Login extends AppCompatActivity{
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
-
+        getpreferences();
+        if (activeUserLog == true){
+            System.out.println("-----------------------fastLogin check");
+            fastLogin();
+        }else{
         login();
         register();
+        }
+    }
+
+    private void setpreferences(){
+        SharedPreferences.Editor editor = setPrefs.edit();
+        editor.putString("Email", emailString);
+        editor.putString("Password", passwordString);
+        editor.apply();
+    }
+
+    private void getpreferences(){
+        String email = getPrefs.getString("Email", null);
+        String password = getPrefs.getString("Password", null);
+        if(!email.equalsIgnoreCase("") && !password.equalsIgnoreCase(""))
+        {
+            activeUserLog = true;
+        }
+    }
+    public void fastLogin(){
+        emailString = getPrefs.getString("Email","");
+        passwordString = getPrefs.getString("Password","");
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams rp = new RequestParams();
+        rp.put("email", emailString);
+        rp.put("passwort", passwordString);
+
+        client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new JsonHttpResponseHandler(){
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (response != null) {
+                    try {
+                        s = Schueler.fromJSON(response);
+                        Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        setpreferences();
+                        intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+                        intent.putExtra("email", emailString);
+                        intent.putExtra("password", passwordString);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(Login.super.getApplicationContext(), "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void login() {
@@ -52,6 +110,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View view) {
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();
+                System.out.println("-----------------------------login check");
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams rp = new RequestParams();
                 rp.put("email", emailString);
