@@ -34,7 +34,7 @@ public class AddEntry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
-
+        //TODO Jürgen: Absenz hinzufügen
         titleText = (EditText) findViewById(R.id.Titletext);
         dateBegin = (TextView) findViewById(R.id.dateBegin);
         dateEnd =   (TextView) findViewById(R.id.dateEnd);

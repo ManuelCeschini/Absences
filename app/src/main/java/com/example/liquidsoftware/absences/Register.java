@@ -57,7 +57,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        //TODO Jürgen: Registerklasse beenden
         pb_register = findViewById(R.id.ladekreis_register);
         srl_r = findViewById(R.id.swipe_refresh_layout_register);
         srl_r.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

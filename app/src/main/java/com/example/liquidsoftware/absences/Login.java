@@ -50,11 +50,11 @@ public class Login extends AppCompatActivity{
 
 
 
-        //getpreferences();
-        /*if (activeUserLog == true) {
+        getpreferences();
+        if (activeUserLog == true) {
             System.out.println("-----------------------fastLogin check");
             fastLogin();
-        }*/
+        }
             login();
             register();
     }

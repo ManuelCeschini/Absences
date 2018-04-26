@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO Jürgen: Nur absenzen von jeweiligen user filtern
         setContentView(R.layout.activity_main);
         ladekreis = findViewById(R.id.ladekreis_main);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main);

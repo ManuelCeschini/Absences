@@ -94,8 +94,8 @@ public class Anzeige extends AppCompatActivity {
 
         try {
             titel.setText(ab.getTitel());
-            datumanfang.setText(ab.getDatum_beginn());
-            datumende.setText(ab.getDatum_ende());
+            datumanfang.setText(ab.getDatum_beginn()); //TODO Jürgen: Datum anderstrum ausgeben (d, m, j)
+            datumende.setText(ab.getDatum_ende());     //TODO Jürgen: Datum anderstrum ausgeben (d, m, j)
             begruendung.setText(ab.getGrund());
 
             textTitle.setText("Titel:");
@@ -104,6 +104,7 @@ public class Anzeige extends AppCompatActivity {
             textBegruendung.setText("Begründung:");
 
             deleteAnzeige.setVisibility(View.VISIBLE);
+            //TODO Jürgen: Delete Funktion zum laufen bringen
 
 
         }catch (Exception e){
