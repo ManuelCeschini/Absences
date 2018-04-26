@@ -74,7 +74,10 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5pt"
                     android:gravity="center"
-                    android:hint="Geburtstag" />
+                    android:hint="Geburtstag"
+                    android:background="@drawable/textlines"
+                    android:textStyle="bold"
+                    />
 
                 <Spinner
                     android:id="@+id/sv_klasse"
@@ -85,7 +88,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:background="@drawable/textlines"
                     />
 
                 <EditText
