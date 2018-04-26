@@ -2,6 +2,7 @@ package com.example.liquidsoftware.absences;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -80,6 +81,12 @@ public class Register extends AppCompatActivity {
         fetchKlassen();
     }
 
+    public String prepareString(String email){
+        email = email.toLowerCase();
+        email = email.trim();
+        return email;
+    }
+
     public void register(ArrayList<String> classes) {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, classes);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,6 +96,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 nameString = name.getText().toString();
                 nachnameString = nachname.getText().toString();
+                nameString = prepareString(nameString);
                 geburtsdatumString = geburtsdatum.getText().toString();
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();

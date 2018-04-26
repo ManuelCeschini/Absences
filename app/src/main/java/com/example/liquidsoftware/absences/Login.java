@@ -50,14 +50,13 @@ public class Login extends AppCompatActivity{
 
 
 
-        getpreferences();
-        if (activeUserLog == true){
+        //getpreferences();
+        /*if (activeUserLog == true) {
             System.out.println("-----------------------fastLogin check");
             fastLogin();
-        }else{
+        }*/
             login();
             register();
-        }
     }
 
     private void setpreferences(){
@@ -92,7 +91,7 @@ public class Login extends AppCompatActivity{
                         s = Schueler.fromJSON(response);
                         Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
-                        setpreferences();
+                        //setpreferences();
                         intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
                         intent.putExtra("email", emailString);
                         intent.putExtra("password", passwordString);
@@ -114,6 +113,10 @@ public class Login extends AppCompatActivity{
             public void onClick(View view) {
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();
+                emailString = emailString.toLowerCase();
+                emailString = emailString.trim();
+                System.out.println("------------------------ email: " + emailString);
+                //emailString.trim();
                 System.out.println("-----------------------------login check");
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams rp = new RequestParams();
