@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Manuel on 21.03.2018.
@@ -13,9 +15,11 @@ import java.util.ArrayList;
 public class Absence {
     private int id;
     private String titel;
-    private String datum_beginn;
-    private String datum_ende;
+    private Date datum_beginn;
+    private Date datum_ende;
     private String grund;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static Date d;
 
     public int getId() {
         return id;
@@ -33,19 +37,19 @@ public class Absence {
         this.titel = titel;
     }
 
-    public String getDatum_beginn() {
+    public Date getDatum_beginn() {
         return datum_beginn;
     }
 
-    public void setDatum_beginn(String datum_beginn) {
+    public void setDatum_beginn(Date datum_beginn) {
         this.datum_beginn = datum_beginn;
     }
 
-    public String getDatum_ende() {
+    public Date getDatum_ende() {
         return datum_ende;
     }
 
-    public void setDatum_ende(String datum_ende) {
+    public void setDatum_ende(Date datum_ende) {
         this.datum_ende = datum_ende;
     }
 
@@ -64,9 +68,11 @@ public class Absence {
             abs.id = o.getInt("absenz_id");
             abs.titel = o.getString("titel");
             abs.grund = o.getString("grund");
-            abs.datum_beginn = o.getString("datum_beginn");
-            abs.datum_ende = o.getString("datum_ende");
-        } catch (JSONException e) {
+            d = sdf.parse(o.getString("datum_beginn"));
+            abs.datum_beginn = d;
+            d = sdf.parse(o.getString("datum_ende"));
+            abs.datum_ende = d;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return abs;

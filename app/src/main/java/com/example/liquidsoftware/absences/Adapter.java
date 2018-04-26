@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  */
 
 public class Adapter extends ArrayAdapter<Absence> {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
     private static class ViewHolder {
         public TextView titel;
@@ -43,8 +46,8 @@ public class Adapter extends ArrayAdapter<Absence> {
             viewHolder = (ViewHolder)converView.getTag();
         }
         viewHolder.titel.setText(params.getTitel());
-        viewHolder.datum_anfang.setText("Von: " + params.getDatum_beginn());
-        viewHolder.datum_ende.setText("Bis: " + params.getDatum_ende());
+        viewHolder.datum_anfang.setText("Von: " + sdf.format(params.getDatum_beginn()));
+        viewHolder.datum_ende.setText("Bis: " + sdf.format(params.getDatum_ende()));
         return converView;
     }
 

@@ -14,6 +14,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cz.msebera.android.httpclient.Header;
 
 public class Anzeige extends AppCompatActivity {
@@ -30,6 +33,7 @@ public class Anzeige extends AppCompatActivity {
     Button deleteAnzeige;
 
     SwipeRefreshLayout swipeRefreshLayout;
+    SimpleDateFormat sdf;
     Absence ab;
     AbsencesClient ac;
     ProgressBar ladekreis;
@@ -48,6 +52,7 @@ public class Anzeige extends AppCompatActivity {
         });
         ab = new Absence();
         ac = new AbsencesClient();
+        sdf = new SimpleDateFormat();
         Intent ii = getIntent();
         Bundle bundle = ii.getExtras();
         ladekreis = findViewById(R.id.ladekreis_anzeige);
@@ -94,8 +99,10 @@ public class Anzeige extends AppCompatActivity {
 
         try {
             titel.setText(ab.getTitel());
-            datumanfang.setText(ab.getDatum_beginn()); //TODO Jürgen: Datum anderstrum ausgeben (d, m, j)
-            datumende.setText(ab.getDatum_ende());     //TODO Jürgen: Datum anderstrum ausgeben (d, m, j)
+            sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Toast.makeText(this, sdf.format(ab.getDatum_beginn()), Toast.LENGTH_SHORT).show();
+            datumanfang.setText(sdf.format(ab.getDatum_beginn()));
+            datumende.setText(sdf.format(ab.getDatum_ende()));
             begruendung.setText(ab.getGrund());
 
             textTitle.setText("Titel:");
