@@ -131,8 +131,7 @@ public class Login extends AppCompatActivity{
                                 Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent();
                                 intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
-                                intent.putExtra("email", emailString);
-                                intent.putExtra("password", passwordString);
+                                intent.putExtra("id", s.getSchueler_id());
                                 startActivity(intent);
                             } catch (Exception e) {
                                 e.printStackTrace();

@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity{
     AbsencesClient ac;
     Adapter adapter;
     private Schueler schueler;
-    private boolean logedin = false;
+    private boolean loggedIn = false;
     private String emailString;
     private String passwordString;
+    private int idInt;
     TextView numberAbsences;
     TextView hAbsences;
     TextView percentAbsences;
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Jürgen: Nur absenzen von jeweiligen user filtern
         setContentView(R.layout.activity_main);
         ladekreis = findViewById(R.id.ladekreis_main);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main);
@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity{
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
         Intent intent = getIntent();
-        emailString = intent.getStringExtra("email");
-        passwordString = intent.getStringExtra("password");
+        idInt = intent.getIntExtra("id", 0);
         try {
             if (adapter.getCount() == 0) {
                 fetchAbsenzen();
@@ -139,16 +138,21 @@ public class MainActivity extends AppCompatActivity{
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
                 ArrayList<Absence> absences;
+                Absence absence;
                 if (response != null) {
+                    adapter.clear();
                     try {
                         arr = response.getJSONArray("absenz");
                         absences = Absence.fromJSON(arr);
-                        adapter.clear();
                         adapter.addAll(absences);
                         numberAbsencesInt = absences.size();
-                        status();
                     } catch (JSONException e) {
+                        absence = Absence.fromJSON(response);
+                        adapter.add(absence);
+                        numberAbsencesInt = 1;
                         e.printStackTrace();
+                    } finally {
+                        status();
                     }
                 }
                 ladekreis.setVisibility(View.GONE);
@@ -160,7 +164,7 @@ public class MainActivity extends AppCompatActivity{
                 ladekreis.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
             }
-        }, "absenz",0);
+        }, "absenzBySchueler", idInt);
     }
 
 }
