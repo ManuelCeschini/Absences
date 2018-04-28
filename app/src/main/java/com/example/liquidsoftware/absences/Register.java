@@ -1,9 +1,7 @@
 package com.example.liquidsoftware.absences;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -149,6 +146,7 @@ public class Register extends AppCompatActivity {
     }
     public void fetchKlassen() {
         kc.getAbsence(new JsonHttpResponseHandler() {
+            //TODO Jürgen: Ladekreisbug fixen
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
                 ArrayList<Klasse> classes;

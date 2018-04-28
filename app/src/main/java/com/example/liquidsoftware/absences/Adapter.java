@@ -1,12 +1,10 @@
 package com.example.liquidsoftware.absences;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -50,5 +48,4 @@ public class Adapter extends ArrayAdapter<Absence> {
         viewHolder.datum_ende.setText("Bis: " + sdf.format(params.getDatum_ende()));
         return converView;
     }
-
 }

@@ -55,8 +55,8 @@ public class Login extends AppCompatActivity{
             System.out.println("-----------------------fastLogin check");
             fastLogin();
         }
-            login();
-            register();
+        login();
+        register();
     }
 
     private void setpreferences(){
@@ -93,8 +93,7 @@ public class Login extends AppCompatActivity{
                         Intent intent = new Intent();
                         //setpreferences();
                         intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
-                        intent.putExtra("email", emailString);
-                        intent.putExtra("password", passwordString);
+                        intent.putExtra("id", s.getSchueler_id());
                         startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -124,7 +123,6 @@ public class Login extends AppCompatActivity{
                 client.clearCredentialsProvider();
                 client.post("http://absences.bplaced.net/Absences_Webservice/login.php", rp, new JsonHttpResponseHandler(){
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        System.out.println("---------------------- Response: " + response);
                         if (response != null) {
                             try {
                                 s = Schueler.fromJSON(response);

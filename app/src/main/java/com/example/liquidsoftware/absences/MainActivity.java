@@ -36,14 +36,18 @@ public class MainActivity extends AppCompatActivity{
     private int idInt;
     TextView numberAbsences;
     TextView hAbsences;
-    TextView percentAbsences;
     private int numberAbsencesInt = 0;
     private int hAbsencesInt = 0;
-    private int percentAbsencesInt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        idInt = intent.getIntExtra("id", 0);
+        if (idInt == 0) {
+            Toast.makeText(MainActivity.this.getApplicationContext(), "Du musst eingeloggt sein", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         setContentView(R.layout.activity_main);
         ladekreis = findViewById(R.id.ladekreis_main);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main);
@@ -57,12 +61,9 @@ public class MainActivity extends AppCompatActivity{
         lv = findViewById(R.id.listView1);
         numberAbsences = findViewById(R.id.numberAbsences);
         hAbsences = findViewById(R.id.hAbsences);
-        percentAbsences = findViewById(R.id.percentAbsences);
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
-        Intent intent = getIntent();
-        idInt = intent.getIntExtra("id", 0);
         try {
             if (adapter.getCount() == 0) {
                 fetchAbsenzen();
@@ -75,6 +76,14 @@ public class MainActivity extends AppCompatActivity{
         actionButton();
 
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        fetchAbsenzen();
+    }
+
     public void status(){
 
         if (numberAbsencesInt != 0){
@@ -87,11 +96,6 @@ public class MainActivity extends AppCompatActivity{
         }else{
             hAbsences.setText("0:00h");
         }
-        if (percentAbsencesInt != 0){
-
-        }else{
-            percentAbsences.setText("0%");
-        }
 
         //TODO Jürgen: stunden und prozent felder füllen
     }
@@ -102,8 +106,8 @@ public class MainActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClassName(getPackageName(), getPackageName() + ".Anzeige");
-                //intent.putExtra("id", lv.getAdapter().getItem(position).toString());
-                intent.putExtra("position", position);
+                Absence a = adapter.getItem(position);
+                intent.putExtra("absenz_id", a.getId());
                 startActivity(intent);
             }
         });
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                intent.putExtra("schueler_id", idInt);
                 intent.setClassName(getPackageName(), getPackageName() + ".AddEntry");
                 startActivity(intent);
             }
@@ -134,24 +139,24 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void fetchAbsenzen() {
+        adapter.clear();
+        ladekreis.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
-                ArrayList<Absence> absences;
-                Absence absence;
+                ArrayList<Absence> absences = new ArrayList<>();
                 if (response != null) {
-                    adapter.clear();
+
                     try {
                         arr = response.getJSONArray("absenz");
                         absences = Absence.fromJSON(arr);
-                        adapter.addAll(absences);
-                        numberAbsencesInt = absences.size();
                     } catch (JSONException e) {
-                        absence = Absence.fromJSON(response);
-                        adapter.add(absence);
-                        numberAbsencesInt = 1;
+                        absences.add(Absence.fromJSON(response));
                         e.printStackTrace();
                     } finally {
+                        adapter.addAll(absences);
+                        numberAbsencesInt = absences.size();
                         status();
                     }
                 }
