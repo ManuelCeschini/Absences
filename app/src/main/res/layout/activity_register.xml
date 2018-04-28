@@ -15,11 +15,11 @@
             android:id="@+id/ladekreis_register"
             android:layout_centerInParent="true" />
 
-        <!--android:visibility="gone"-->
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:visibility="gone"
             android:id="@+id/scrollview_register">
             <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"

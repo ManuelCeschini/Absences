@@ -1,6 +1,7 @@
 package com.example.liquidsoftware.absences;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -57,7 +58,6 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //TODO Jürgen: Registerklasse beenden
         pb_register = findViewById(R.id.ladekreis_register);
         srl_r = findViewById(R.id.swipe_refresh_layout_register);
         srl_r.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -96,15 +96,16 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 nameString = name.getText().toString();
                 nachnameString = nachname.getText().toString();
-                nameString = prepareString(nameString);
                 geburtsdatumString = geburtsdatum.getText().toString();
-                emailString = email.getText().toString();
+                emailString = prepareString(email.getText().toString());
                 passwordString = password.getText().toString();
                 rePasswordString = rePassword.getText().toString();
                 klasseIdInt = klasseId.getSelectedItemPosition();
                 klasseIdInt += 1;
 
                 if (passwordString.equals(rePasswordString)) {
+                    pb_register.setVisibility(View.VISIBLE);
+                    sv_r.setVisibility(View.GONE);
                     AsyncHttpClient client = new AsyncHttpClient();
                     RequestParams rp = new RequestParams();
                     rp.put("vorname", nameString);
@@ -113,17 +114,30 @@ public class Register extends AppCompatActivity {
                     rp.put("email", emailString);
                     rp.put("passwort", passwordString);
                     rp.put("klasse_id", klasseIdInt);
-                    client.post("http://absences.bplaced.net/Absences_Webservice/register.php", rp, new TextHttpResponseHandler() {
+                    client.post("http://absences.bplaced.net/Absences_Webservice/register.php", rp, new JsonHttpResponseHandler() {
                         @Override
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                            Toast.makeText(Register.super.getApplicationContext(), "Ein Fehler ist aufgetreten", Toast.LENGTH_LONG).show();
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            String errMsg = "Es ist ein Fehler aufgetreten";
+                            if (errorResponse != null) {
+                                try {
+                                    errMsg = errorResponse.getString("response");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            pb_register.setVisibility(View.GONE);
+                            sv_r.setVisibility(View.VISIBLE);
+                            Toast.makeText(Register.super.getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
                             Toast.makeText(Register.super.getApplicationContext(), "Registrierung erfolgreich", Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     });
+                } else {
+                    rePassword.setError("Die Passwörter stimmen nicht überein");
                 }
             }
         });
