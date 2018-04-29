@@ -32,7 +32,9 @@ public class Anzeige extends AppCompatActivity {
     TextView textDatumAnfang;
     TextView textDatumEnde;
     TextView textBegruendung;
+    Button exAnzeige;
     Button deleteAnzeige;
+
 
     SwipeRefreshLayout swipeRefreshLayout;
     SimpleDateFormat sdf;
@@ -45,6 +47,7 @@ public class Anzeige extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anzeige);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_anzeige);
+        exAnzeige = findViewById(R.id.exAnzeige);
         deleteAnzeige = findViewById(R.id.deleteAnzeige);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -63,7 +66,6 @@ public class Anzeige extends AppCompatActivity {
         }catch (Exception e){
             System.out.println("Failed to load fetchAbsenzen in Anzeige: " + e);
         }
-
     }
     public void fetchAbsenzen(){
         ac.getAbsence(new JsonHttpResponseHandler() {
@@ -108,13 +110,28 @@ public class Anzeige extends AppCompatActivity {
             textDatumEnde.setText("Bis: ");
             textBegruendung.setText("Begründung:");
 
+            exAnzeige.setVisibility(View.VISIBLE);
             deleteAnzeige.setVisibility(View.VISIBLE);
             deleteEntry();
+            exAnzeige();
 
 
         }catch (Exception e){
             System.out.println("Failed to load params in Anzeige: " + e);
         }
+    }
+    public void exAnzeige(){
+        if (true){ //TODO Jürgen: status der absenz, falls entschuldigt heißt der button "Unentschuldigt"
+            exAnzeige.setText("Unentschuldigt");
+        } else {
+            exAnzeige.setText("Entschuldigt");
+        }
+        exAnzeige.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*TODO Jürgen: Button 1x gedrückt entschuldigt, 2x gedrückt wieder untentschuldigt, immer gegenteil als gespeichert*/
+            }
+        });
     }
     public void deleteEntry() {
             deleteAnzeige.setOnClickListener(new View.OnClickListener() {

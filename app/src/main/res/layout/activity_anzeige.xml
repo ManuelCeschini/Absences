@@ -96,13 +96,24 @@
             android:layout_marginLeft="4dp"
             android:gravity="center"
             />
-        
         <Button
-            android:id="@+id/deleteAnzeige"
+            android:id="@+id/exAnzeige"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/AnzeigeBegruendung"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="invisible"
+            android:textStyle="bold"
+            android:background="#E81F3F"
+            />
+        <Button
+            android:id="@+id/deleteAnzeige"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/exAnzeige"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Delete"
