@@ -1,10 +1,15 @@
 package com.example.liquidsoftware.absences;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,15 +29,20 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity{
 
+    //Layout-spezifische initialisierungen
     ProgressBar ladekreis;
     SwipeRefreshLayout swipeRefreshLayout;
     ListView lv;
     AbsencesClient ac;
     Adapter adapter;
-    private Schueler schueler;
+
+    //Login und Schüler initialisierungen
     private boolean loggedIn = false;
+    private Schueler scoolar;
     private String emailString;
     private String passwordString;
+
+    //Absenzen Ititialisierungen
     private int idInt;
     TextView numberAbsences;
     TextView hAbsences;
@@ -49,6 +59,8 @@ public class MainActivity extends AppCompatActivity{
             finish();
         }
         setContentView(R.layout.activity_main);
+
+        //Layout zuweisungen
         ladekreis = findViewById(R.id.ladekreis_main);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_main);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -57,21 +69,25 @@ public class MainActivity extends AppCompatActivity{
                 fetchAbsenzen();
             }
         });
-        schueler = new Schueler();
         lv = findViewById(R.id.listView1);
         numberAbsences = findViewById(R.id.numberAbsences);
         hAbsences = findViewById(R.id.hAbsences);
+
+        //Initialisierungen
+        scoolar = new Schueler();
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
+
+        //Absenzen Aufrufen
         try {
-            if (adapter.getCount() == 0) {
-                fetchAbsenzen();
-            }
+            if (adapter.getCount() == 0) {fetchAbsenzen();}
         }catch (Exception e){
             System.out.println("Fail to load params fron fetchAbsenzen");
         }
         lv.setAdapter(adapter);
+
+        //Funktionenaufrug für Aktionen
         anzeige();
         actionButton();
 
@@ -172,5 +188,32 @@ public class MainActivity extends AppCompatActivity{
         }, "absenzBySchueler", idInt);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+            if (id==R.id.logOut){
+                SharedPreferences prefs = this.getApplicationContext().getSharedPreferences("userdetails", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
+                editor.commit();
+                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+
+            }else if (id==R.id.exit){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    this.finishAffinity();
+                }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAndRemoveTask();
+                }
+            }
+        return true;
+    }
 }
 
