@@ -20,8 +20,8 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class Login extends AppCompatActivity{
-    SharedPreferences setPrefs;
-    SharedPreferences getPrefs;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
     private boolean activeUserLog = false;
     private EditText email;
     private EditText password;
@@ -37,9 +37,8 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setPrefs = this.getApplicationContext().getSharedPreferences("userdetails", Context.MODE_PRIVATE);
-        getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        prefs = this.getApplicationContext().getSharedPreferences("userdetails", Context.MODE_PRIVATE);
+        editor = prefs.edit();
         //buttons
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
@@ -47,8 +46,6 @@ public class Login extends AppCompatActivity{
         //Login Fields
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-
-
 
         getpreferences();
         if (activeUserLog == true) {
@@ -60,25 +57,28 @@ public class Login extends AppCompatActivity{
     }
 
     private void setpreferences(){
-        SharedPreferences.Editor editor = setPrefs.edit();
+        cleare();
         editor.putString("Email", emailString);
         editor.putString("Password", passwordString);
-        //editor.clear();
-        //editor.commit();
         editor.apply();
+    }
+    private void cleare(){
+        editor.clear();
+        editor.commit();
     }
 
     private void getpreferences(){
-        String email = getPrefs.getString("Email", "");
-        String password = getPrefs.getString("Password", "");
+        String email = prefs.getString("Email", "");
+        String password = prefs.getString("Password", "");
+        System.out.println("------------------------prefs: "+ email +" "+ password);
         if(!email.equalsIgnoreCase("") && !password.equalsIgnoreCase(""))
         {
             activeUserLog = true;
         }
     }
     public void fastLogin(){
-        emailString = getPrefs.getString("Email","");
-        passwordString = getPrefs.getString("Password","");
+        emailString = prefs.getString("Email","");
+        passwordString = prefs.getString("Password","");
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams rp = new RequestParams();
         rp.put("email", emailString);
@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity{
                         s = Schueler.fromJSON(response);
                         Toast.makeText(Login.super.getApplicationContext(), "Login erfolgreich. Benutzer " + s.getVorname(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
-                        //setpreferences();
+                        setpreferences();
                         intent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
                         intent.putExtra("id", s.getSchueler_id());
                         startActivity(intent);
