@@ -78,16 +78,9 @@ public class MainActivity extends AppCompatActivity{
         ac = new AbsencesClient();
         ArrayList<Absence> arr = new ArrayList<>();
         adapter = new Adapter(this, arr);
-
-        //Absenzen Aufrufen
-        try {
-            if (adapter.getCount() == 0) {fetchAbsenzen();}
-        }catch (Exception e){
-            System.out.println("Fail to load params fron fetchAbsenzen");
-        }
         lv.setAdapter(adapter);
 
-        //Funktionenaufrug für Aktionen
+        //Funktionenaufruf für Aktionen
         anzeige();
         actionButton();
 
@@ -97,6 +90,7 @@ public class MainActivity extends AppCompatActivity{
     public void onResume()
     {
         super.onResume();
+        ladekreis.setVisibility(View.VISIBLE);
         fetchAbsenzen();
     }
 
@@ -156,14 +150,11 @@ public class MainActivity extends AppCompatActivity{
 
     public void fetchAbsenzen() {
         adapter.clear();
-        ladekreis.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
                 ArrayList<Absence> absences = new ArrayList<>();
                 if (response != null) {
-
                     try {
                         arr = response.getJSONArray("absenz");
                         absences = Absence.fromJSON(arr);
