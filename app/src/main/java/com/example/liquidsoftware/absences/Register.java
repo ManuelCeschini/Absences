@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,7 +86,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void register(ArrayList<String> classes) {
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, classes);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, classes);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         klasseId.setAdapter(dataAdapter);
         register.setOnClickListener(new View.OnClickListener() {
@@ -111,22 +112,14 @@ public class Register extends AppCompatActivity {
                     rp.put("email", emailString);
                     rp.put("passwort", passwordString);
                     rp.put("klasse_id", klasseIdInt);
-                    client.post("http://absences.bplaced.net/Absences_Webservice/register.php", rp, new JsonHttpResponseHandler() {
+                    client.post("http://absences.bplaced.net/Absences_Webservice/register.php", rp, new TextHttpResponseHandler() {
                         @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                            String errMsg = "Es ist ein Fehler aufgetreten";
-                            if (errorResponse != null) {
-                                try {
-                                    errMsg = errorResponse.getString("response");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            String errMsg = responseString;
                             pb_register.setVisibility(View.GONE);
                             sv_r.setVisibility(View.VISIBLE);
                             Toast.makeText(Register.super.getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
                         }
-
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
                             Toast.makeText(Register.super.getApplicationContext(), "Registrierung erfolgreich", Toast.LENGTH_LONG).show();
@@ -146,7 +139,6 @@ public class Register extends AppCompatActivity {
     }
     public void fetchKlassen() {
         kc.getAbsence(new JsonHttpResponseHandler() {
-            //TODO Jürgen: Ladekreisbug fixen
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray arr = null;
                 ArrayList<Klasse> classes;

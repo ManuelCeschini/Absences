@@ -16,10 +16,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-import org.json.JSONObject;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.Calendar;
 
@@ -83,29 +81,14 @@ public class AddEntry extends AppCompatActivity {
         rp.put("datum_beginn", dateBeginString);
         rp.put("datum_ende", dateEndString);
         rp.put("schueler_id", schuelerIdInt);
-        client.post("http://absences.bplaced.net/Absences_Webservice/addEntry.php", rp, new JsonHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                String errMsg = "Es ist ein Fehler aufgetreten";
-                if (errorResponse != null) {
-                    try {
-                        errMsg = errorResponse.getString("response");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                pb_add_entry.setVisibility(View.GONE);
-                rl_ae.setVisibility(View.VISIBLE);
-                Toast.makeText(AddEntry.super.getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
-            }
+        client.post("http://absences.bplaced.net/Absences_Webservice/addEntry.php", rp, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                String errMsg = "Es ist ein !JSON Fehler aufgetreten";
+                String errMsg = responseString;
                 pb_add_entry.setVisibility(View.GONE);
                 rl_ae.setVisibility(View.VISIBLE);
                 Toast.makeText(AddEntry.super.getApplicationContext(), errMsg, Toast.LENGTH_LONG).show();
             }
-            //TODO Jürgen: Ladekreisbug fixen
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Toast.makeText(AddEntry.super.getApplicationContext(), "Absenz hinzugefügt", Toast.LENGTH_LONG).show();
