@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +33,11 @@ public class Anzeige extends AppCompatActivity {
     TextView textDatumAnfang;
     TextView textDatumEnde;
     TextView textBegruendung;
-    Button exAnzeige;
     Button deleteAnzeige;
 
 
     SwipeRefreshLayout swipeRefreshLayout;
+    RelativeLayout relativeLayout;
     SimpleDateFormat sdf;
     Absence ab;
     AbsencesClient ac;
@@ -47,7 +48,15 @@ public class Anzeige extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anzeige);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_anzeige);
-        exAnzeige = findViewById(R.id.exAnzeige);
+        relativeLayout = findViewById(R.id.relative_layout_anzeige);
+        titel = findViewById(R.id.AnzeigeTitel);
+        datumanfang = findViewById(R.id.AnzeigeDatumStart);
+        datumende = findViewById(R.id.AnzeigeDatumEnde);
+        begruendung = findViewById(R.id.AnzeigeBegruendung);
+        textTitle = findViewById(R.id.textTitle);
+        textDatumAnfang = findViewById(R.id.textDatumAnfang);
+        textDatumEnde = findViewById(R.id.textDatumEnde);
+        textBegruendung = findViewById(R.id.textBegruendung);
         deleteAnzeige = findViewById(R.id.deleteAnzeige);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -74,12 +83,15 @@ public class Anzeige extends AppCompatActivity {
                     try {
                         ab = Absence.fromJSON(response);
                         assignParams();
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 ladekreis.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
+                relativeLayout.setVisibility(View.VISIBLE);
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Toast.makeText(Anzeige.super.getApplicationContext(), "Laden der Daten fehlgeschlagen", Toast.LENGTH_SHORT).show();
@@ -89,15 +101,6 @@ public class Anzeige extends AppCompatActivity {
         }, "absenz", id);
     }
     public void assignParams() {
-        titel = findViewById(R.id.AnzeigeTitel);
-        datumanfang = findViewById(R.id.AnzeigeDatumStart);
-        datumende = findViewById(R.id.AnzeigeDatumEnde);
-        begruendung = findViewById(R.id.AnzeigeBegruendung);
-        textTitle = (TextView) findViewById(R.id.textTitle);
-        textDatumAnfang = (TextView) findViewById(R.id.textDatumAnfang);
-        textDatumEnde = (TextView) findViewById(R.id.textDatumEnde);
-        textBegruendung = (TextView) findViewById(R.id.textBegruendung);
-
         try {
             titel.setText(ab.getTitel());
             sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -109,50 +112,71 @@ public class Anzeige extends AppCompatActivity {
             textDatumAnfang.setText("Von:");
             textDatumEnde.setText("Bis: ");
             textBegruendung.setText("Begründung:");
-
-            exAnzeige.setVisibility(View.VISIBLE);
-            deleteAnzeige.setVisibility(View.VISIBLE);
             deleteEntry();
-            exAnzeige();
-
-
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("Failed to load params in Anzeige: " + e);
         }
     }
-    public void exAnzeige(){
-        if (true){ //TODO Jürgen: status der absenz, falls entschuldigt heißt der button "Unentschuldigt"
+
+    public void deleteEntry() {
+        deleteAnzeige.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams rp = new RequestParams();
+                rp.put("absenz_id", id);
+                client.clearCredentialsProvider();
+                client.post("http://absences.bplaced.net/Absences_Webservice/delete.php", rp, new TextHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString){
+                        Toast.makeText(Anzeige.super.getApplicationContext(), "Löschen erfolgreich", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(Anzeige.super.getApplicationContext(), "Löschen fehlgeschlagen", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+
+        /*public void exAnzeige(){
+        setEntschuldigtBtn();
+        exAnzeige.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                relativeLayout.setVisibility(View.GONE);
+                ladekreis.setVisibility(View.VISIBLE);
+                ab.setEntschuldigt(!ab.isEntschuldigt());
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams rp = new RequestParams();
+                rp.put("absenz_id", ab.getId());
+                rp.put("entschuldigt", ab.isEntschuldigt());
+                client.clearCredentialsProvider();
+                client.post("http://absences.bplaced.net/Absences_Webservice/changeAbsenceState.php", rp, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        ladekreis.setVisibility(View.GONE);
+                        Toast.makeText(Anzeige.this, "Eintrag konnte nicht verändert werden", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        setEntschuldigtBtn();
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        ladekreis.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+    }
+    public void setEntschuldigtBtn() {
+        if (ab.isEntschuldigt()){
             exAnzeige.setText("Unentschuldigt");
         } else {
             exAnzeige.setText("Entschuldigt");
         }
-        exAnzeige.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*TODO Jürgen: Button 1x gedrückt entschuldigt, 2x gedrückt wieder untentschuldigt, immer gegenteil als gespeichert*/
-            }
-        });
-    }
-    public void deleteEntry() {
-            deleteAnzeige.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    RequestParams rp = new RequestParams();
-                    rp.put("absenz_id", id);
-                    client.clearCredentialsProvider();
-                    client.post("http://absences.bplaced.net/Absences_Webservice/delete.php", rp, new TextHttpResponseHandler(){
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String responseString){
-                            Toast.makeText(Anzeige.super.getApplicationContext(), "Löschen erfolgreich", Toast.LENGTH_LONG).show();
-                            finish();
-                        }
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                            Toast.makeText(Anzeige.super.getApplicationContext(), "Löschen fehlgeschlagen", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-
-    }
+    }*/
 }

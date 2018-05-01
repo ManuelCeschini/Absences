@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,6 +35,8 @@ public class Login extends AppCompatActivity{
     private String passwordString;
 
     //Layout-spezifische initialisierungen
+    RelativeLayout relativeLayout;
+    ProgressBar progressBar;
     Button login;
     Button register;
 
@@ -50,6 +54,8 @@ public class Login extends AppCompatActivity{
         editor = prefs.edit();
 
         //Layout zuweisungen
+        relativeLayout = findViewById(R.id.relative_layout_login);
+        progressBar = findViewById(R.id.ladekreis_login);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
         email = findViewById(R.id.email);
@@ -84,6 +90,8 @@ public class Login extends AppCompatActivity{
         }
     }
     public void fastLogin(){
+        relativeLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         emailString = prefs.getString("Email","");
         passwordString = prefs.getString("Password","");
         AsyncHttpClient client = new AsyncHttpClient();
@@ -116,10 +124,11 @@ public class Login extends AppCompatActivity{
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                relativeLayout.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 emailString = email.getText().toString();
                 passwordString = password.getText().toString();
                 emailString = prepareString(emailString);
-                //emailString.trim();
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams rp = new RequestParams();
                 rp.put("email", emailString);

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Register"
     android:id="@+id/swipe_refresh_layout_register">
 
     <RelativeLayout
@@ -21,10 +22,9 @@
             android:layout_height="match_parent"
             android:visibility="gone"
             android:id="@+id/scrollview_register">
-            <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".Register">
+                android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/re_text"
                     android:layout_width="match_parent"

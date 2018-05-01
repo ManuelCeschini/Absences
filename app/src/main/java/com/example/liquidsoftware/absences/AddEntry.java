@@ -49,7 +49,7 @@ public class AddEntry extends AppCompatActivity {
         Intent intent = getIntent();
         schuelerIdInt = intent.getIntExtra("schueler_id", 0);
         if (schuelerIdInt == 0) {
-            Toast.makeText(AddEntry.this.getApplicationContext(), "Du musst eingeloggt sein", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEntry.this, "Du musst eingeloggt sein", Toast.LENGTH_SHORT).show();
             finish();
         }
 

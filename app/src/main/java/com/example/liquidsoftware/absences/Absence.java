@@ -18,7 +18,8 @@ public class Absence {
     private Date datum_beginn;
     private Date datum_ende;
     private String grund;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private boolean entschuldigt;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static Date d;
 
     public int getId() {
@@ -61,6 +62,13 @@ public class Absence {
         this.grund = grund;
     }
 
+    public boolean isEntschuldigt() {
+        return entschuldigt;
+    }
+
+    public void setEntschuldigt(boolean entschuldigt) {
+        this.entschuldigt = entschuldigt;
+    }
 
     public static Absence fromJSON(JSONObject o){
         Absence abs = new Absence();
@@ -72,6 +80,7 @@ public class Absence {
             abs.datum_beginn = d;
             d = sdf.parse(o.getString("datum_ende"));
             abs.datum_ende = d;
+            abs.entschuldigt = o.getBoolean("entschuldigt");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package com.example.liquidsoftware.absences;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -123,6 +124,9 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
                             Toast.makeText(Register.super.getApplicationContext(), "Registrierung erfolgreich", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             finish();
                         }
                     });

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = getIntent();
         idInt = intent.getIntExtra("id", 0);
         if (idInt == 0) {
-            Toast.makeText(MainActivity.this.getApplicationContext(), "Du musst eingeloggt sein", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Du musst eingeloggt sein", Toast.LENGTH_SHORT).show();
             finish();
         }
         setContentView(R.layout.activity_main);
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity{
         });
         lv = findViewById(R.id.listView1);
         numberAbsences = findViewById(R.id.numberAbsences);
-        hAbsences = findViewById(R.id.hAbsences);
 
         //Initialisierungen
         scoolar = new Schueler();
@@ -101,13 +100,6 @@ public class MainActivity extends AppCompatActivity{
         }else{
             numberAbsences.setText("0");
         }
-        if (hAbsencesInt != 0){
-
-        }else{
-            hAbsences.setText("0:00h");
-        }
-
-        //TODO Jürgen: stunden und prozent felder füllen
     }
 
     public void anzeige(){
@@ -152,7 +144,7 @@ public class MainActivity extends AppCompatActivity{
         adapter.clear();
         ac.getAbsence(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                JSONArray arr = null;
+                JSONArray arr;
                 ArrayList<Absence> absences = new ArrayList<>();
                 if (response != null) {
                     try {
@@ -169,7 +161,6 @@ public class MainActivity extends AppCompatActivity{
                 }
                 ladekreis.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
-
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Toast.makeText(MainActivity.super.getApplicationContext(), "Laden der Daten fehlgeschlagen", Toast.LENGTH_SHORT).show();
@@ -193,10 +184,10 @@ public class MainActivity extends AppCompatActivity{
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.clear();
                 editor.commit();
-                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
             }else if (id==R.id.exit){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     this.finishAffinity();
