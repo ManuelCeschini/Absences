@@ -40,6 +40,7 @@ public class AddEntry extends AppCompatActivity {
     private String titelString;
     private String grundString;
     private int schuelerIdInt;
+    private boolean[] dateTimeSet;
 
 
     @Override
@@ -63,6 +64,7 @@ public class AddEntry extends AppCompatActivity {
         btAb = findViewById(R.id.entryAbbrechen);
         rl_ae = findViewById(R.id.relative_layout_add_entry);
         pb_add_entry = findViewById(R.id.ladekreis_add_entry);
+        dateTimeSet = new boolean[4];
 
         dBegin();
         dEnd();
@@ -100,11 +102,21 @@ public class AddEntry extends AppCompatActivity {
     public void button(){
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                titelString = titelText.getText().toString();
-                grundString = grund.getText().toString();
-                dateBeginString = dateBegin.getText().toString() + " " + timeBegin.getText().toString();
-                dateEndString = dateEnd.getText().toString() + " " + timeEnd.getText().toString();
-                addNewEntry();
+                int i = 0;
+                for (boolean d : dateTimeSet) {
+                    if (d) {
+                        i += 1;
+                    }
+                }
+                if (i == 4) {
+                    titelString = titelText.getText().toString();
+                    grundString = grund.getText().toString();
+                    dateBeginString = dateBegin.getText().toString() + " " + timeBegin.getText().toString();
+                    dateEndString = dateEnd.getText().toString() + " " + timeEnd.getText().toString();
+                    addNewEntry();
+                } else {
+                    Toast.makeText(AddEntry.this, "Nicht alle Felder sind ausgefüllt", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -124,6 +136,7 @@ public class AddEntry extends AppCompatActivity {
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        dateTimeSet[0] = true;
                         int[] params = new int[3];
                         params[0] = String.valueOf(selectedHour).length();
                         params[1] = String.valueOf(selectedMinute).length();
@@ -155,6 +168,7 @@ public class AddEntry extends AppCompatActivity {
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(AddEntry.this, new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        dateTimeSet[1] = true;
                         int[] params = new int[3];
                         params[0] = String.valueOf(selectedHour).length();
                         params[1] = String.valueOf(selectedMinute).length();
@@ -187,6 +201,7 @@ public class AddEntry extends AppCompatActivity {
                 mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        dateTimeSet[2] = true;
                         int[] params = new int[3];
                         params[0] = String.valueOf(i).length();
                         params[1] = String.valueOf(i1).length();
@@ -226,6 +241,7 @@ public class AddEntry extends AppCompatActivity {
                 mDatePicker = new DatePickerDialog(AddEntry.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        dateTimeSet[3] = true;
                         int[] params = new int[3];
                         params[0] = String.valueOf(i).length();
                         params[1] = String.valueOf(i1).length();
