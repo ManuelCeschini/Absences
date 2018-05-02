@@ -151,6 +151,8 @@ public class Login extends AppCompatActivity{
                         }
                     }
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(Login.super.getApplicationContext(), "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
                     }
                 });

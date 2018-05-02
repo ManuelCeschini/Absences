@@ -103,8 +103,8 @@ public class AddEntry extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 boolean i = true;
-                System.out.println(dateBegin.getText().toString());
-                System.out.println(timeBegin.getText().toString());
+                //Toast.makeText(AddEntry.this, dateBegin.getText().toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddEntry.this, timeEnd.getText().toString(), Toast.LENGTH_SHORT).show();
                 for (boolean d : dateTimeSet) {
                     if (!d) {
                         i = false;
