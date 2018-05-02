@@ -139,9 +139,9 @@ public class Anzeige extends AppCompatActivity {
             }
         });
     }
-
-
-        /*public void exAnzeige(){
+}
+/*
+    public void exAnzeige(){
         setEntschuldigtBtn();
         exAnzeige.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,5 +178,5 @@ public class Anzeige extends AppCompatActivity {
         } else {
             exAnzeige.setText("Entschuldigt");
         }
-    }*/
-}
+    }
+*/

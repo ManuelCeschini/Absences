@@ -102,13 +102,16 @@ public class AddEntry extends AppCompatActivity {
     public void button(){
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                int i = 0;
+                boolean i = true;
+                System.out.println(dateBegin.getText().toString());
+                System.out.println(timeBegin.getText().toString());
                 for (boolean d : dateTimeSet) {
-                    if (d) {
-                        i += 1;
+                    if (!d) {
+                        i = false;
+                        break;
                     }
                 }
-                if (i == 4) {
+                if (i) {
                     titelString = titelText.getText().toString();
                     grundString = grund.getText().toString();
                     dateBeginString = dateBegin.getText().toString() + " " + timeBegin.getText().toString();
