@@ -6,7 +6,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class AbsencesClient {
 
-    private static final String API_BASE_URL = "http://absences.bplaced.com/";
+    private static final String API_BASE_URL = "http://absences.bplaced.net/";
     private AsyncHttpClient client;
 
     public AbsencesClient() {
