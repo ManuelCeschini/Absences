@@ -26,3 +26,4 @@ public class AbsencesClient {
          client.get(getAPIUrl(parameter, id), handler);
     }
 }
+
